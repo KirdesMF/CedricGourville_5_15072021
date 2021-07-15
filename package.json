@@ -1,0 +1,25 @@
+{
+   "name": "cedricgourville_5_15072021",
+   "version": "1.0.0",
+   "description": "P5 OC",
+   "main": "index.js",
+   "scripts": {
+      "install-backend": "cd backend && npm install",
+      "start-backend": "cd backend && node server",
+      "install-frontend": "cd frontend && npm install",
+      "start-frontend": "cd frontend && npm run start"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/KirdesMF/CedricGourville_5_15072021.git"
+   },
+   "author": "KirdesMF",
+   "license": "ISC",
+   "bugs": {
+      "url": "https://github.com/KirdesMF/CedricGourville_5_15072021/issues"
+   },
+   "homepage": "https://github.com/KirdesMF/CedricGourville_5_15072021#readme",
+   "workspaces": [
+      "frontend"
+   ]
+}
