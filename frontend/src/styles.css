@@ -92,8 +92,16 @@ button {
    }
 }
 
-.container {
-   min-height: 100vh;
+body {
+   display: grid;
+   gap: 1rem;
+
+   padding: 0 2.5rem;
+}
+
+.teddies,
+.cameras,
+.furniture {
    display: grid;
    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
    grid-template-rows: 20rem;

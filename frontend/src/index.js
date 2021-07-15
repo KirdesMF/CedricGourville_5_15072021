@@ -1,17 +1,24 @@
-function getImages(teddies) {
-   const container = document.querySelector('.container');
-
-   teddies.forEach((teddy) => {
-      container.innerHTML += `<img src="${teddy.imageUrl}" />`;
+function displayImages({ datas, container }) {
+   datas.forEach((data) => {
+      container.innerHTML += `<img src="${data.imageUrl}" />`;
    });
 }
 
-function fetchTeddies() {
-   const url = 'http://localhost:3000/api/teddies';
-
+function fetchImages({ url, container }) {
    fetch(url)
       .then((res) => res.json())
-      .then((data) => getImages(data))
+      .then((data) => displayImages({ datas: data, container }))
       .catch((err) => console.log(err));
 }
-fetchTeddies();
+
+const teddiesContainer = document.querySelector('.teddies');
+const camerasContainer = document.querySelector('.cameras');
+const furnitureContainer = document.querySelector('.furniture');
+
+const teddiesUrl = 'http://localhost:3000/api/teddies';
+const camerasUrl = 'http://localhost:3000/api/cameras';
+const furnitureUrl = 'http://localhost:3000/api/furniture';
+
+fetchImages({ url: teddiesUrl, container: teddiesContainer });
+fetchImages({ url: camerasUrl, container: camerasContainer });
+fetchImages({ url: furnitureUrl, container: furnitureContainer });
