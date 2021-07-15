@@ -2,7 +2,6 @@
    "name": "cedricgourville_5_15072021",
    "version": "1.0.0",
    "description": "P5 OC",
-   "main": "index.js",
    "scripts": {
       "install-backend": "cd backend && npm install",
       "start-backend": "cd backend && npm run start",
