@@ -1,14 +1,14 @@
 @import './scss/base/reset';
 @import './scss/base/global';
+@import './scss/base/colors';
+@import './scss/base/fonts';
 
 @import './scss/composition/wrapper.scss';
+@import './scss/composition/panel';
 
-body {
-   display: grid;
-   gap: 1rem;
+@import './scss/block/nav';
 
-   padding: 0 2.5rem;
-}
+@import './scss/utilities.scss/flex';
 
 .teddies,
 .cameras,
