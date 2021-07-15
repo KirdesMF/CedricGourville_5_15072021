@@ -1,8 +1,8 @@
-document.body.style.background = 'red';
-
 function getImages(teddies) {
+   const container = document.querySelector('.container');
+
    teddies.forEach((teddy) => {
-      document.body.innerHTML += `<img src="${teddy.imageUrl}" />`;
+      container.innerHTML += `<img src="${teddy.imageUrl}" />`;
    });
 }
 
