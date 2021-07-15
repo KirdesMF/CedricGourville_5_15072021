@@ -1,0 +1,26 @@
+@import './scss/base/reset';
+@import './scss/base/global';
+
+@import './scss/composition/wrapper.scss';
+
+body {
+   display: grid;
+   gap: 1rem;
+
+   padding: 0 2.5rem;
+}
+
+.teddies,
+.cameras,
+.furniture {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+   grid-template-rows: 20rem;
+   place-content: center;
+}
+
+img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
