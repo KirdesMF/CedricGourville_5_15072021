@@ -4,10 +4,12 @@
    "description": "P5 OC",
    "main": "index.js",
    "scripts": {
+      "heroku-prebuild": "build",
       "install-backend": "cd backend && npm install",
       "start-backend": "cd backend && npm run start",
       "install-frontend": "cd frontend && npm install",
       "start-frontend": "cd frontend && npm run start",
+      "build": "parcel build ./src/index.html --dist-dir public",
       "start-all": "concurrently \"npm run start-frontend\" \"npm run start-backend\" "
    },
    "repository": {
@@ -25,5 +27,8 @@
    ],
    "devDependencies": {
       "concurrently": "^6.2.0"
+   },
+   "engines": {
+      "node": "14.x"
    }
 }
