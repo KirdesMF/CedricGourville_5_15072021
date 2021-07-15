@@ -1,0 +1,22 @@
+{
+   "name": "frontend",
+   "version": "1.0.0",
+   "description": "",
+   "main": "index.js",
+   "scripts": {
+      "start": "parcel serve ./src/index.html --open"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/KirdesMF/CedricGourville_5_15072021.git"
+   },
+   "author": "KirdesMF",
+   "license": "ISC",
+   "bugs": {
+      "url": "https://github.com/KirdesMF/CedricGourville_5_15072021/issues"
+   },
+   "homepage": "https://github.com/KirdesMF/CedricGourville_5_15072021#readme",
+   "devDependencies": {
+      "parcel": "^2.0.0-beta.3.1"
+   }
+}
