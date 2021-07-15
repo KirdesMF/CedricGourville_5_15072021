@@ -7,9 +7,7 @@
       "start-backend": "cd backend && npm run start",
       "install-frontend": "cd frontend && npm install",
       "start-frontend": "cd frontend && npm run start",
-      "start-all": "concurrently \"npm run start-frontend\" \"npm run start-backend\" ",
-      "heroku-prebuild": "cd backend && npm install",
-      "heroku-postbuild": "cd backend && npm run start"
+      "start-all": "concurrently \"npm run start-frontend\" \"npm run start-backend\" "
    },
    "repository": {
       "type": "git",
@@ -26,8 +24,5 @@
    ],
    "devDependencies": {
       "concurrently": "^6.2.0"
-   },
-   "engines": {
-      "node": "14.x"
    }
 }
