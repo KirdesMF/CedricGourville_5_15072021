@@ -9,7 +9,7 @@
       "install-frontend": "cd frontend && npm install",
       "start-frontend": "cd frontend && npm run start",
       "start-all": "concurrently \"npm run start-frontend\" \"npm run start-backend\" ",
-      "heroku-prebuild": "cd backend && npm install",
+      "heroku-prebuild": "cd frontend && npm install",
       "heroku-postbuild": "cd frontend && npm run build"
    },
    "repository": {
