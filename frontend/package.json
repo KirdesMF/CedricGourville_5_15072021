@@ -2,7 +2,6 @@
    "name": "frontend",
    "version": "1.0.0",
    "description": "",
-   "main": "index.js",
    "scripts": {
       "start": "parcel serve ./src/index.html --open",
       "build": "parcel build ./src/index.html --dist-dir public"
