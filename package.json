@@ -10,7 +10,7 @@
       "start-frontend": "cd frontend && npm run start",
       "build": "cd frontend && npm run build",
       "start-all": "concurrently \"npm run start-frontend\" \"npm run start-backend\" ",
-      "heroku-prebuild": "build"
+      "heroku-prebuild": "cd frontend && npm run build"
    },
    "repository": {
       "type": "git",
