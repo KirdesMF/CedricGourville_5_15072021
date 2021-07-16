@@ -11,7 +11,6 @@ const routes = [
 function handleAnchorNav() {
    const anchors = document.querySelectorAll('.nav > a');
    const routerEvent = new Event('router');
-
    anchors.forEach((anchor) =>
       anchor.addEventListener('click', (e) => {
          e.preventDefault();
@@ -29,8 +28,8 @@ function startRouter() {
 }
 
 function init() {
-   handleAnchorNav();
    startRouter();
+   handleAnchorNav();
 }
 
 window.addEventListener('load', init);
