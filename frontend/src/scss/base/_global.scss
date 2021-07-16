@@ -1,3 +1,7 @@
 :root {
    --padding-wrapper: 3rem;
 }
+
+body {
+   transition: background 200ms ease;
+}
