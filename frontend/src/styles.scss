@@ -3,8 +3,9 @@
 @import './scss/base/colors';
 @import './scss/base/fonts';
 
-@import './scss/composition/wrapper.scss';
+@import './scss/composition/wrapper';
 @import './scss/composition/panel';
+@import './scss/composition/flow';
 
 @import './scss/block/nav';
 @import './scss/block/svg';

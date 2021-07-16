@@ -1,13 +1,16 @@
 export const Home = {
    render: () => {
-      const pathname = window.location.pathname;
-      pathname === '/' ? (document.body.style.background = 'red') : '';
       return `
-         <nav>
-            <a href="/teddies" ></a>
-            <a href="/cameras" ></a>
-            <a href="/furnitures" ></a>
-         </nav>
+         <section class="panel">
+            <div class="wrapper grid-flow">
+               <h1>Voici notre gamme de produits</h1>
+               <nav>
+                  <a href="/teddies" >Teddies</a>
+                  <a href="/cameras" >Cameras</a>
+                  <a href="/furnitures" >Furnitures</a>
+               </nav>
+            </div>
+         </section>
       `;
    },
 };

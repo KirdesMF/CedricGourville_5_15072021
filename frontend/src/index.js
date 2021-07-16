@@ -1,3 +1,4 @@
+import './styles.scss';
 import './js/router/router';
 
 // function displayImages({ datas, container }) {

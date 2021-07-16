@@ -3,5 +3,6 @@
 }
 
 body {
-   transition: background 200ms ease;
+   background: var(--color-background);
+   color: var(--color-text);
 }
