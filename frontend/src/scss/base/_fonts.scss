@@ -1,0 +1,18 @@
+@font-face {
+   font-family: 'RozhaOne';
+   src: url('./assets/fonts/RozhaOne-Regular.ttf') format('truetype');
+}
+
+@font-face {
+   font-family: 'Taviraj-Light';
+   src: url('./assets/fonts/Taviraj-Light.ttf') format('truetype');
+   font-weight: 400;
+}
+
+h1 {
+   font-family: 'RozhaOne';
+}
+
+a {
+   font-family: 'Taviraj-Light';
+}
