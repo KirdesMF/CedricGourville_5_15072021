@@ -1,13 +1,21 @@
+const LINKS = [
+   { path: '/teddies', text: 'Teddies' },
+   { path: '/cameras', text: 'Cameras' },
+   { path: '/furniture', text: 'Furniture' },
+];
+
+const anchors = LINKS.map(
+   (link) => `<a href="${link.path}" data-router="true">${link.text}</a>`
+).join('');
+
 export const Home = {
    render: () => {
-      return `
-         <section class="panel  mh100 grid grid-center">
+      return /* html */ `
+         <section class="panel mh100 grid grid-center">
             <div class="grid-flow wrapper">
-               <h1>Voici notre gamme de produits</h1>
+               <h1>Séléction de nos meilleures ventes</h1>
                <nav class="nav">
-                  <a href="/teddies" >Teddies</a>
-                  <a href="/cameras" >Cameras</a>
-                  <a href="/furnitures" >Furnitures</a>
+                  ${anchors}
                </nav>
             </div>
          </section>
