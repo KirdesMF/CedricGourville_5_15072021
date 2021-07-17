@@ -8,7 +8,7 @@ export const Product = {
 
       return /*html */ `
          <section class="panel" >
-            <div class="wrapper">
+            <div class="wrapper grid-flow">
                <h2>PRODUCT</h2>
                <img src="${datas.imageUrl}" />
             </div>
@@ -20,8 +20,10 @@ export const Product = {
 async function getImagesApi(path, id) {
    try {
       const res = await fetch(`http://localhost:3000/api/${path}/${id}`);
+
       if (!res.ok) {
          console.log(res.status);
+
          return;
       }
 

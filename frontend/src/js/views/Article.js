@@ -6,7 +6,10 @@ export const Article = {
       const images = datas
          .map(
             (d) =>
-               `<a data-router="true" href="/${path}/?id=${d._id}" ><img src="${d.imageUrl}" /></a>`
+               `<a data-router="true" href="/${path}/?id=${d._id}" >
+                  <img src="${d.imageUrl}" />
+               </a>
+               `
          )
          .join('');
 
