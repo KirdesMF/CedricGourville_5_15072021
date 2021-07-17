@@ -2,9 +2,11 @@ import { Article } from '../views/Article';
 import { Error404 } from '../views/Error404';
 import { Home } from '../views/Home';
 import { Product } from '../views/Product';
+import { ShoppingCart } from '../views/ShoppingCart';
 
 const routes = [
    { path: '/', component: Home },
+   { path: '/shopping-cart', component: ShoppingCart },
    { path: '/teddies', component: Article },
    { path: '/cameras', component: Article },
    { path: '/furniture', component: Article },
