@@ -38,6 +38,7 @@ async function startRouter() {
 
    // check the path
    const { component } = routes.find((route) => {
+      // product comp
       if (href.includes('?id=')) {
          return route.path === '/product';
       }
