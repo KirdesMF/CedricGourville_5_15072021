@@ -11,7 +11,7 @@ const anchors = LINKS.map(
 export const Home = {
    render: () => {
       return /* html */ `
-         <section class="panel mh100 grid grid-center">
+         <section class="panel h100 grid grid-center">
             <div class="grid-flow wrapper">
                <h1>Séléction de nos meilleures ventes</h1>
                <nav class="nav">

@@ -3,13 +3,19 @@ export const Article = {
       const path = window.location.pathname.slice(1);
       const title = path.toUpperCase();
       const datas = await getDatasApi(path);
-      const images = datas.map((d) => `<img src="${d.imageUrl}" />`).join('');
+      console.log(datas);
+      const images = datas
+         .map(
+            (d) =>
+               `<a data-router="true" href="/${path}/${d['_id']}" ><img src="${d.imageUrl}" /></a>`
+         )
+         .join('');
 
       return /* html */ `
-         <section class="panel mh100 grid grid-center">
-            <div class="wrapper" id="myContainer">
+         <section class="panel h100 grid grid-center">
+            <div class="wrapper grid-flow" id="myContainer">
                <h1>${title}</h1>
-               <div>${images}</div>
+               <div class="grid-images" >${images}</div>
             </div>
          </section>
       `;
@@ -23,6 +29,7 @@ async function getDatasApi(path) {
          console.log(res.status);
          return;
       }
+
       return res.json();
    } catch (err) {
       console.log(err);

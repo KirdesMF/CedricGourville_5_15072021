@@ -2,3 +2,8 @@
    display: grid;
    gap: var(--gap-flow, 2.5rem);
 }
+
+.body-flow {
+   display: grid;
+   grid-auto-rows: max-content 1fr;
+}
