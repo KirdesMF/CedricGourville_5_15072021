@@ -1,11 +1,13 @@
 import { Article } from '../views/Article';
 import { Home } from '../views/Home';
+import { Product } from '../views/Product';
 
 const routes = [
    { path: '/', component: Home },
    { path: '/teddies', component: Article },
    { path: '/cameras', component: Article },
    { path: '/furniture', component: Article },
+   { path: '/product', component: Product },
 ];
 
 function setLinkRouter() {
@@ -24,7 +26,9 @@ function setLinkRouter() {
 async function startRouter() {
    const app = document.getElementById('app');
    const path = window.location.pathname.toLowerCase();
-   const { component } = routes.find((route) => route.path === path);
+   const { component } = routes.find(
+      (route) => route.path === path || route.path.includes('/product')
+   );
    app.innerHTML = await component.render();
    setLinkRouter();
 }

@@ -3,11 +3,10 @@ export const Article = {
       const path = window.location.pathname.slice(1);
       const title = path.toUpperCase();
       const datas = await getDatasApi(path);
-      console.log(datas);
       const images = datas
          .map(
             (d) =>
-               `<a data-router="true" href="/${path}/${d['_id']}" ><img src="${d.imageUrl}" /></a>`
+               `<a data-router="true" href="/${path}/?id=${d._id}" ><img src="${d.imageUrl}" /></a>`
          )
          .join('');
 

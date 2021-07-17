@@ -3,8 +3,9 @@
    "version": "1.0.0",
    "description": "",
    "scripts": {
-      "start": "parcel serve ./src/index.html --open",
-      "build": "parcel build ./src/index.html --dist-dir public"
+      "clean-cache": "npx rimraf .parcel-cache dist",
+      "start": "npx rimraf .parcel-cache dist && parcel serve ./src/index.html --open",
+      "build": "npx rimraf public && parcel build ./src/index.html --dist-dir public"
    },
    "repository": {
       "type": "git",
