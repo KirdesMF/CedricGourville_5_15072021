@@ -13,10 +13,14 @@ const routes = [
 function setLinkRouter() {
    const anchors = document.querySelectorAll(`[data-router="true"]`);
    const routerEvent = new Event('router');
+   const path = window.location.pathname;
 
    anchors.forEach((anchor) =>
       anchor.addEventListener('click', (e) => {
          e.preventDefault();
+         if (path === e.target.pathname) {
+            return;
+         }
          window.history.pushState({}, '', anchor.href.toLowerCase());
          window.dispatchEvent(routerEvent);
       })
@@ -33,5 +37,6 @@ async function startRouter() {
    setLinkRouter();
 }
 
-window.addEventListener('load', startRouter);
-window.addEventListener('router', startRouter);
+['load', 'router', 'popstate'].forEach((event) =>
+   window.addEventListener(event, startRouter, false)
+);
