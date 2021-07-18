@@ -9,6 +9,18 @@
    font-weight: 400;
 }
 
+h1,
+h2,
+h3,
+p,
+a {
+   font-size: clamp(
+      var(--fluid-type-min, 1rem),
+      calc(1rem + var(--fluid-type-target, 3vw)),
+      var(--fluid-type-max, 1.3rem)
+   );
+}
+
 h1 {
    font-family: 'RozhaOne';
    font-size: 1.875rem;

@@ -13,7 +13,7 @@
       />
       <title>Orinoco - Home</title>
    </head>
-   <body class="body-flow">
+   <body class="body">
       <!-- svg -->
       <svg class="svg-assets" xmlns="http://www.w3.org/2000/svg">
          <defs>
@@ -72,35 +72,32 @@
       </svg>
 
       <header class="header panel">
-         <div class="wrapper header__inner">
-            <button>
-               <svg class="svg-icon">
-                  <use href="#menu-icon" />
-               </svg>
-            </button>
+         <div class="wrapper">
+            <div class="header__inner">
+               <button>
+                  <svg class="svg-icon">
+                     <use href="#menu-icon" />
+                  </svg>
+               </button>
 
-            <a href="/" data-router="true">
-               <svg class="svg-icon">
-                  <use href="#orinoco-chars" />
-               </svg>
-            </a>
+               <a href="/" data-router="true">
+                  <svg class="svg-icon">
+                     <use href="#orinoco-chars" />
+                  </svg>
+               </a>
 
-            <a href="/shopping-cart" data-router="true">
-               <svg class="svg-icon">
-                  <use href="#orinoco-icon" />
-               </svg>
-            </a>
+               <a href="/shopping-cart" data-router="true">
+                  <svg class="svg-icon">
+                     <use href="#orinoco-icon" />
+                  </svg>
+               </a>
+            </div>
          </div>
       </header>
 
       <!-- main -->
       <main id="app"></main>
 
-      <footer class="panel">
-         <div class="wrapper">
-            <h4>Orinoco</h4>
-         </div>
-      </footer>
       <script type="module" src="./index.js"></script>
    </body>
 </html>
