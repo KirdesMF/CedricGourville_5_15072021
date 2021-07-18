@@ -7,10 +7,14 @@ export const Product = {
       const datas = await getImagesApi(path, id);
 
       return /*html */ `
-         <section class="panel" >
-            <div class="wrapper grid-flow">
-               <h2>PRODUCT</h2>
-               <img src="${datas.imageUrl}" />
+         <section class="product panel" >
+            <div class="wrapper">
+               <div class="product__inner" >
+                  <h1>${datas.name}</h1>
+                  <img src="${datas.imageUrl}" />
+                  <p>${datas.description}</p>
+                  <small>${datas.price}</small>
+               </div>
             </div>
          </section>
       `;
