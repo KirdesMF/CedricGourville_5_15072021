@@ -10,10 +10,13 @@ export const Product = {
          <section class="product panel" >
             <div class="wrapper">
                <div class="product__inner" >
-                  <h1>${datas.name}</h1>
                   <img src="${datas.imageUrl}" />
-                  <p>${datas.description}</p>
-                  <small>${datas.price}</small>
+                  <div class="product__content" >
+                     <h1>${datas.name}</h1>
+                     <p>${datas.description}</p>
+                     <b>${datas.price}€</b>
+                     <button>Add to cart</button>
+                  </div>
                </div>
             </div>
          </section>
