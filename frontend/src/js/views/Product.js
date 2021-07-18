@@ -1,3 +1,5 @@
+import { formatPrice } from '../utils/utils';
+
 export const Product = {
    render: async () => {
       const href = window.location.href;
@@ -14,7 +16,7 @@ export const Product = {
                   <div class="product__content" >
                      <h1>${datas.name}</h1>
                      <p>${datas.description}</p>
-                     <b>${datas.price}€</b>
+                     <b>${formatPrice(datas.price)}</b>
                      <button>Add to cart</button>
                   </div>
                </div>

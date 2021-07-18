@@ -1,3 +1,5 @@
+import { formatPrice } from '../utils/utils';
+
 export const Article = {
    render: async () => {
       const path = window.location.pathname.slice(1);
@@ -6,11 +8,13 @@ export const Article = {
       const images = datas
          .map(
             (d) =>
-               `<a data-router="true" class="article__card" href="/${path}/?id=${d._id}" >
+               `<a data-router="true" class="article__card" href="/${path}/?id=${
+                  d._id
+               }" >
                   <img width="320" height="240" src="${d.imageUrl}" />
                   <div>
                      <h2>${d.name}</h2>
-                     <small>${d.price}€</small>
+                     <small>${formatPrice(d.price)}</small>
                   </div>
                </a>
                `
