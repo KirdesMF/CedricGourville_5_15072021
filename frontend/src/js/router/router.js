@@ -47,6 +47,9 @@ async function startRouter() {
 
    // render component
    app.innerHTML = await component.render();
+   if ('set' in component) {
+      component.set();
+   }
    setLinkRouter();
 }
 
