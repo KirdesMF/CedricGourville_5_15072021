@@ -1,7 +1,7 @@
 import {
-   addToLocalStorage,
    formatPrice,
    getOptionsFromDatas,
+   useLocalStorage,
 } from '../utils/utils';
 
 export const Product = {
@@ -38,7 +38,7 @@ export const Product = {
                         ${formatedPrice}
                      </b>
                      <form action="">
-                        <input type="number" max="99" min="1" value="1" />
+                        <input data-cart="quantity" type="number" max="99" min="1" value="1" />
                         <select>
                            ${options}
                         </select>
@@ -53,24 +53,21 @@ export const Product = {
 
    set: () => {
       const btn = document.querySelector(`[data-cart="btn"]`);
-      const form = document.querySelector(`form`);
-      console.log(form);
+      const input = document.querySelector(`[data-cart="quantity"]`);
       const product = document.querySelector('[data-id]');
-
-      // get datas
-      const id = product.getAttribute('data-id');
-      const name = product.getAttribute('data-name');
-      const price = product.getAttribute('data-price');
-      const category = product.getAttribute('data-category');
 
       btn.addEventListener('click', (e) => {
          e.preventDefault();
-         if (form.checkValidity()) {
-            alert('item add to cart');
-            localStorage.setObject(category, { [name]: price });
-         } else {
-            form.reportValidity();
-         }
+
+         const datas = {
+            id: product.getAttribute('data-id'),
+            name: product.getAttribute('data-name'),
+            price: product.getAttribute('data-price'),
+            category: product.getAttribute('data-category'),
+            quantity: input.value,
+         };
+
+         useLocalStorage.addItem(datas);
       });
    },
 };
