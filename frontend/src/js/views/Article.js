@@ -5,6 +5,8 @@ export const Article = {
       const path = window.location.pathname.slice(1);
       const title = path;
       const datas = await getDatasApi(path);
+      console.log(window.location.pathname);
+
       const images = datas
          .map(
             (d) =>
