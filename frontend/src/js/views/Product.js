@@ -1,8 +1,5 @@
-import {
-   formatPrice,
-   getOptionsFromDatas,
-   useLocalStorage,
-} from '../utils/utils';
+import { useLocalStorage } from '../utils/local-storage';
+import { formatPrice, getOptionsFromDatas } from '../utils/utils';
 
 export const Product = {
    render: async () => {
@@ -39,7 +36,7 @@ export const Product = {
                      </b>
                      <form action="">
                         <input data-cart="quantity" type="number" max="99" min="1" value="1" />
-                        <select>
+                        <select data-cart="options" >
                            ${options}
                         </select>
                         <button type="submit" data-cart="btn" >Add to cart</button>
@@ -54,17 +51,18 @@ export const Product = {
    set: () => {
       const btn = document.querySelector(`[data-cart="btn"]`);
       const input = document.querySelector(`[data-cart="quantity"]`);
+      const select = document.querySelector(`[data-cart="options"]`);
       const product = document.querySelector('[data-id]');
 
       btn.addEventListener('click', (e) => {
          e.preventDefault();
-
          const datas = {
             id: product.getAttribute('data-id'),
             name: product.getAttribute('data-name'),
             price: product.getAttribute('data-price'),
             category: product.getAttribute('data-category'),
             quantity: input.value,
+            option: { name: select.value, quantity: input.value },
          };
 
          useLocalStorage.addItem(datas);
