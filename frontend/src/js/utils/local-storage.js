@@ -10,12 +10,23 @@ export const useLocalStorage = {
    getAllItems: function () {
       let storage = {};
 
-      for (let [key, value] of Object.entries(localStorage)) {
+      for (let [key, value] of Object.entries(window.localStorage)) {
          storage[key] = JSON.parse(value);
       }
 
       return storage || {};
    },
+
+   getTotalItems: function () {
+      const allItems = this.getAllItems();
+   },
+
+   /**
+    * @description clear all local storage
+    *
+    */
+   clearAll: () => localStorage.clear(),
+
    /**
     *
     * @param {string} key

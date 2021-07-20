@@ -16,22 +16,24 @@ const routes = [
 
 function setLinkRouter() {
    const anchors = document.querySelectorAll(`[data-router="true"]`);
-   const routerEvent = new Event('router');
    const path = window.location.pathname;
+   console.log(anchors);
 
    anchors.forEach((anchor) =>
       anchor.addEventListener('click', (e) => {
          e.preventDefault();
+
          if (path === e.target.pathname) {
             return;
          }
+
          window.history.pushState({}, '', anchor.href.toLowerCase());
-         window.dispatchEvent(routerEvent);
+         renderView();
       })
    );
 }
 
-async function startRouter() {
+async function renderView() {
    const app = document.getElementById('app');
    const path = window.location.pathname.toLowerCase();
    const href = window.location.href;
@@ -50,9 +52,12 @@ async function startRouter() {
    if ('set' in component) {
       component.set();
    }
-   setLinkRouter();
 }
 
-['load', 'router', 'popstate'].forEach((event) =>
-   window.addEventListener(event, startRouter, false)
-);
+window.onload = () => {
+   renderView().then(() => setLinkRouter());
+};
+
+window.addEventListener('popstate', () => {
+   renderView().then(() => setLinkRouter());
+});
