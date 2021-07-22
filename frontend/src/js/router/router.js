@@ -17,7 +17,6 @@ const routes = [
 
 async function renderView() {
    const app = document.getElementById('app');
-   // const path = window.location.pathname;
    const path = getLastPathname(window.location.pathname);
    const href = window.location.href;
 
@@ -30,7 +29,6 @@ async function renderView() {
       return route.path === path || route.path === '/error';
    });
 
-   // render component
    app.innerHTML = await component.render();
    if ('set' in component) {
       component.set();
@@ -38,28 +36,27 @@ async function renderView() {
    setLinkRouter();
 }
 
-function setLinkRouter() {
-   const anchors = document.querySelectorAll(`[data-router="true"]`);
+const handleAnchor = (event) => {
+   event.preventDefault();
+
    const path = window.location.pathname;
+   const href = event.target.getAttribute('href');
 
-   const handleAnchor = (event) => {
-      e.preventDefault();
+   if (path === href) {
+      return;
+   } else {
+      window.history.pushState({}, '', href);
+      renderView();
+   }
+};
 
-      // dont render it if comp already here
-      if (path === anchor.href) {
-         return;
-      } else {
-         // change URL
-         window.history.pushState({}, '', anchor.href.toLowerCase());
-
-         // render
-         renderView();
-      }
-   };
+function setLinkRouter() {
+   const anchors = document.querySelectorAll(`[data-router]`);
 
    anchors.forEach((anchor) => {
-      // check if anchor has already the event
-      if (!anchor.hasAttribute('data-event')) {
+      if (anchor.hasAttribute('data-event')) {
+         return;
+      } else {
          anchor.addEventListener('click', handleAnchor);
          anchor.setAttribute('data-event', 'true');
       }

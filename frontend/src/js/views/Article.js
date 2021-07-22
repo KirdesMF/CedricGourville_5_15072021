@@ -5,12 +5,11 @@ export const Article = {
       const path = window.location.pathname.slice(1);
       const title = path;
       const datas = await getDatasApi(path);
-      console.log(window.location.pathname);
 
       const images = datas
          .map(
             (d) =>
-               `<a data-router="true" class="article__card" href="/${path}/?id=${
+               `<a data-router="true" class="article__card" href="/${path}/product?id=${
                   d._id
                }" >
                   <img width="320" height="240" src="${d.imageUrl}" />
