@@ -45,7 +45,8 @@ const handleAnchor = (event) => {
    if (path === href) {
       return;
    } else {
-      window.history.pushState({}, '', href);
+      window.history.pushState({ category: href }, '', href);
+      console.log(history);
       renderView();
    }
 };
