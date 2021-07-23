@@ -24,7 +24,7 @@ export const Product = {
                      src="${datas.imageUrl}"
                      alt="${datas.name}"
                      data-name="${datas.name}"
-                     data-id="${id}" 
+                     data-id="${datas._id}" 
                      data-category="${path}" 
                      data-price="${datas.price}"
                   />
@@ -61,7 +61,7 @@ export const Product = {
             name: product.getAttribute('data-name'),
             price: product.getAttribute('data-price'),
             category: product.getAttribute('data-category'),
-            quantity: input.value,
+            quantity: input.valueAsNumber,
             option: { name: select.value, quantity: input.value },
          };
 
