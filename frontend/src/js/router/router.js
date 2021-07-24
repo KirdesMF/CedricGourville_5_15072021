@@ -10,10 +10,12 @@ function setDocumentTitle(title) {
 
 function updateLinkShoppingCart() {
    const link = document.querySelector('#shopping-link');
-   const path = window.location.pathname;
 
-   if (path === '/') link.setAttribute('href', `/shopping-cart`);
-   else link.setAttribute('href', `${path}/shopping-cart`);
+   const path = window.location.pathname;
+   const category = history.state.category;
+
+   if (path === '/') link.setAttribute('href', `/all/shopping-cart`);
+   else link.setAttribute('href', `/${category}/shopping-cart`);
 }
 
 const handleAnchor = (event) => {
@@ -21,19 +23,16 @@ const handleAnchor = (event) => {
 
    const path = window.location.pathname;
    const href = event.target.getAttribute('href');
-   const category = event.target.pathname.slice(1);
+   const category = event.target.pathname.split('/')[1];
 
-   if (path === href) {
-      return;
-   } else {
-      window.history.pushState({ category: category }, '', href);
-      renderView();
-   }
+   if (path === href) return;
+
+   window.history.pushState({ category: category }, '', href);
+   renderView();
 };
 
 function setLinkRouter() {
    const anchors = document.querySelectorAll(`[data-router]`);
-
    anchors.forEach((anchor) => {
       if (anchor.hasAttribute('data-event')) {
          return;
@@ -42,6 +41,8 @@ function setLinkRouter() {
          anchor.setAttribute('data-event', 'true');
       }
    });
+
+   updateLinkShoppingCart();
 }
 
 const routes = [
@@ -82,7 +83,6 @@ async function renderView() {
 
    setDocumentTitle(title);
    setLinkRouter();
-   updateLinkShoppingCart();
 }
 
 ['popstate', 'load'].forEach((event) =>
