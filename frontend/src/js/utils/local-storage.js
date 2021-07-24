@@ -1,100 +1,73 @@
-import { parseStringToNumber } from './utils';
-// TODO refactor
+/**
+ *
+ * @param {string} key
+ * @returns
+ */
+function getItem(key) {
+   return JSON.parse(localStorage.getItem(key)) || [];
+}
+
+function getAllCategory() {
+   for (let [key, value] of Object.entries(localStorage)) {
+      console.log(JSON.parse(value));
+   }
+}
 
 /**
- * Local storage method
  *
- *
+ * @param {string} category
+ * @param {object} items
  */
-export const useLocalStorage = {
-   getAllItems: function () {
-      let storage = {};
+function addItem({ key, name, quantity, price, id, option }) {
+   const category = getItem(key);
+   const item = category.find((cat) => cat.name === name);
 
-      for (let [key, value] of Object.entries(window.localStorage)) {
-         storage[key] = JSON.parse(value);
-      }
+   if (item) {
+      item.quantity += quantity;
 
-      return storage || {};
-   },
+      const optionItem = item.options.find((i) => i.name === option.name);
 
-   getTotalItems: function () {
-      const allItems = this.getAllItems();
-   },
+      optionItem
+         ? (optionItem.quantity += quantity)
+         : item.options.push(option);
+   } else {
+      category.push({
+         name,
+         price,
+         quantity,
+         id,
+         options: [{ ...option }],
+      });
+   }
+   localStorage.setItem(key, JSON.stringify(category));
+}
 
-   /**
-    * @description clear all local storage
-    *
-    */
-   clearAll: () => localStorage.clear(),
+function removeItem(key, quantity) {
+   const items = getItem(key);
+   const item = items.find((i) => i.name === key);
 
-   /**
-    *
-    * @param {string} key
-    * @returns
-    *
-    */
-   getItem: function (key) {
-      return JSON.parse(localStorage.getItem(key)) || [];
-   },
+   if (!item) {
+      return;
+   } else {
+      item.quantity -= quantity;
+   }
 
-   /**
-    *
-    * @param {Object.<string, string>}
-    *
-    */
-   addItem: function ({ name, quantity, price, id, category, option }) {
-      const items = this.getItem(name);
-      const item = items.find((i) => i.name === name);
+   if (item.quantity <= 0) {
+      item.quantity = 0;
+      localStorage.removeItem(key);
+   } else {
+      localStorage.setItem(key, JSON.stringify(items));
+   }
+}
 
-      if (item) {
-         item.quantity =
-            parseStringToNumber(item.quantity) + parseStringToNumber(quantity);
+function clear() {
+   localStorage.clear();
+}
 
-         const optionItem = item.options.find((i) => i.name === option.name);
-
-         if (optionItem) {
-            optionItem.quantity =
-               parseStringToNumber(optionItem.quantity) +
-               parseStringToNumber(quantity);
-         } else {
-            item.options.push(option);
-         }
-      } else {
-         items.push({
-            name,
-            price,
-            quantity,
-            id,
-            category,
-            options: [{ ...option }],
-         });
-      }
-
-      localStorage.setItem(name, JSON.stringify(items));
-   },
-
-   /**
-    *
-    * @param {string} name
-    * @param {string} quantity
-    * @returns
-    */
-   removeItem: function (name, quantity) {
-      const items = this.getItem(name);
-      const item = items.find((i) => i.name === name);
-
-      if (!item) {
-         return;
-      } else {
-         item.quantity =
-            parseStringToNumber(item.quantity) - parseStringToNumber(quantity);
-      }
-
-      if (item.quantity <= 0) {
-         item.quantity = 0;
-         localStorage.removeItem(name);
-      } else {
-         localStorage.setItem(name, JSON.stringify(items));
-      }
-   },
+export const useStorage = {
+   clear,
+   addItem,
+   removeItem,
+   getItem,
+   getAllCategory,
 };

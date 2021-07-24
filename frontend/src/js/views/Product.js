@@ -1,4 +1,5 @@
-import { useLocalStorage } from '../utils/local-storage';
+import { getImagesApi } from '../utils/fetch';
+import { useStorage } from '../utils/local-storage';
 import { formatPrice, getOptionsFromDatas } from '../utils/utils';
 
 export const Product = {
@@ -6,15 +7,13 @@ export const Product = {
       const href = window.location.href;
       const id = new URL(href).searchParams.get('id');
       const path = window.location.pathname.replaceAll('/', '');
-
       const keyOptions = getOptionsFromDatas(path);
-
       const datas = await getImagesApi(path, id);
+      const formatedPrice = formatPrice(datas.price);
+
       const options = datas[keyOptions].map(
          (d) => `<option value="${d}">${d}</option>`
       );
-
-      const formatedPrice = formatPrice(datas.price);
 
       return /*html */ `
          <section class="product panel" >
@@ -22,10 +21,9 @@ export const Product = {
                <div class="product__inner" >
                   <img 
                      src="${datas.imageUrl}"
-                     alt="${datas.name}"
+                     alt="${datas.description}"
                      data-name="${datas.name}"
                      data-id="${datas._id}" 
-                     data-category="${path}" 
                      data-price="${datas.price}"
                   />
                   <div class="product__content" >
@@ -53,35 +51,20 @@ export const Product = {
       const input = document.querySelector(`[data-cart="quantity"]`);
       const select = document.querySelector(`[data-cart="options"]`);
       const product = document.querySelector('[data-id]');
+      const key = window.history.state.category;
 
       btn.addEventListener('click', (e) => {
          e.preventDefault();
          const datas = {
+            key: key,
             id: product.getAttribute('data-id'),
             name: product.getAttribute('data-name'),
             price: product.getAttribute('data-price'),
-            category: product.getAttribute('data-category'),
             quantity: input.valueAsNumber,
-            option: { name: select.value, quantity: input.value },
+            option: { name: select.value, quantity: input.valueAsNumber },
          };
 
-         useLocalStorage.addItem(datas);
+         useStorage.addItem(datas);
       });
    },
 };
-
-async function getImagesApi(path, id) {
-   try {
-      const res = await fetch(`http://localhost:3000/api/${path}/${id}`);
-
-      if (!res.ok) {
-         console.log(res.status);
-
-         return;
-      }
-
-      return res.json();
-   } catch (err) {
-      console.log(err);
-   }
-}

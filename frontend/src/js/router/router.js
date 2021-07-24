@@ -1,4 +1,3 @@
-import { getLastPathname } from '../utils/pathname';
 import { Article } from '../views/Article';
 import { Error404 } from '../views/Error404';
 import { Home } from '../views/Home';
@@ -22,13 +21,12 @@ const handleAnchor = (event) => {
 
    const path = window.location.pathname;
    const href = event.target.getAttribute('href');
-   const category = href.split('/')[1];
+   const category = event.target.pathname.slice(1);
 
    if (path === href) {
       return;
    } else {
       window.history.pushState({ category: category }, '', href);
-      console.log(history);
       renderView();
    }
 };
