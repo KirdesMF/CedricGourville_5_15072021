@@ -8,27 +8,31 @@ export const ShoppingCart = {
       const datas = useStorage.getCategory(category);
       const form = await FormCart.render();
 
+      if (datas && !datas.length) return `<div>YOUR CART IS EMPTY</div>`;
+
       return /* html */ `
          <section class="shopping-cart panel h100 grid-flow grid-center">
-            <table>
-               <thead>
-                  <tr>
-                     <th colspan="100">Shopping Cart ${category}</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  ${datas
-                     .map((d) =>
-                        TableCart({
-                           name: d.name,
-                           id: d.id,
-                           quantity: d.quantity,
-                           price: d.price,
-                        })
-                     )
-                     .join('')}
-               </tbody>
-            </table>
+            <div class="wrapper" >
+               <table>
+                  <thead>
+                     <tr>
+                        <th colspan="100">Shopping Cart ${category}</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     ${datas
+                        .map((d) =>
+                           TableCart({
+                              name: d.name,
+                              id: d.id,
+                              quantity: d.quantity,
+                              price: d.price,
+                           })
+                        )
+                        .join('')}
+                  </tbody>
+               </table>
+            </div>
          </section>
          <section class="panel">${form}</section>
       `;

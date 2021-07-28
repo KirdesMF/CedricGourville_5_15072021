@@ -1,5 +1,10 @@
 import { useStorage } from './local-storage';
 
+/**
+ *
+ * @param {string} path
+ * @returns
+ */
 export async function getDatasApi(path) {
    try {
       const res = await fetch(`http://localhost:3000/api/${path}`);
@@ -14,6 +19,12 @@ export async function getDatasApi(path) {
    }
 }
 
+/**
+ *
+ * @param {string} path
+ * @param {string} id
+ * @returns
+ */
 export async function getImagesApi(path, id) {
    try {
       const res = await fetch(`http://localhost:3000/api/${path}/${id}`);
@@ -32,8 +43,8 @@ export async function getImagesApi(path, id) {
 
 /**
  *
- * @param {*} category
- * @param {*} order
+ * @param {string} category
+ * @param {object} order
  */
 export function postCommand(category, order) {
    fetch(`http://localhost:3000/api/${category}/order`, {
@@ -42,6 +53,9 @@ export function postCommand(category, order) {
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
    })
       .then((res) => res.json())
-      .then(() => useStorage.cleanShoppingCart(category))
+      .then(() => {
+         useStorage.cleanCategory(category);
+         window.location.href = '/success';
+      })
       .catch((err) => alert(err));
 }
