@@ -45,19 +45,27 @@ export const FormCart = {
       const datas = useStorage.getCategory(category);
       const products = datas.map((d) => d.id);
 
-      const order = {
-         contact: {
-            firstName: 'firstname',
-            lastName: 'lastname',
-            address: 'dsqs',
-            city: 'city',
-            email: 'email',
-         },
-         products: products,
-      };
+      const firstName = document.getElementById('firstName');
+      const lastName = document.getElementById('lastName');
+      const email = document.getElementById('email');
+      const city = document.getElementById('city');
+      const address = document.getElementById('address');
+      const zip = document.getElementById('zip');
 
       form.addEventListener('submit', (e) => {
          e.preventDefault();
+
+         const order = {
+            contact: {
+               firstName: firstName.value,
+               lastName: lastName.value,
+               address: `${address.value} ${zip.value}`,
+               city: city.value,
+               email: email.value,
+            },
+            products: products,
+         };
+
          postCommand(category, order);
       });
    },

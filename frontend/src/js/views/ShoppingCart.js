@@ -38,6 +38,8 @@ export const ShoppingCart = {
       `;
    },
    set: () => {
-      FormCart.set();
+      const category = history.state.category;
+      const datas = useStorage.getCategory(category);
+      if (datas && datas.length) FormCart.set();
    },
 };

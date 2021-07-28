@@ -53,9 +53,10 @@ export function postCommand(category, order) {
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
    })
       .then((res) => res.json())
-      .then(() => {
+      .then((json) => {
+         console.log(json);
          useStorage.cleanCategory(category);
-         window.location.href = '/success';
+         // window.location.href = '/success';
       })
       .catch((err) => alert(err));
 }
