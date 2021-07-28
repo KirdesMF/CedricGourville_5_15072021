@@ -32,7 +32,7 @@ const handleAnchor = (event) => {
    renderView();
 };
 
-function setLinkRouter() {
+export function setLinkRouter() {
    const anchors = document.querySelectorAll(`[data-router]`);
    anchors.forEach((anchor) => {
       if (anchor.hasAttribute('data-event')) {
@@ -42,8 +42,6 @@ function setLinkRouter() {
          anchor.setAttribute('data-event', 'true');
       }
    });
-
-   updateLinkShoppingCart();
 }
 
 const routes = [
@@ -79,6 +77,7 @@ async function renderView() {
       if (path.includes('/success')) {
          return route.path === '/success';
       }
+
       return route.path === path || route.path === '/error';
    });
 
@@ -89,6 +88,7 @@ async function renderView() {
 
    setDocumentTitle(title);
    setLinkRouter();
+   updateLinkShoppingCart();
 }
 
 ['popstate', 'load'].forEach((event) =>

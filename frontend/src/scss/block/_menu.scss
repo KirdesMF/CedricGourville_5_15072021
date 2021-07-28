@@ -1,0 +1,21 @@
+.menu {
+   position: fixed;
+   height: 100%;
+   width: 50%;
+
+   z-index: 10;
+
+   display: grid;
+   grid-template-rows: 10% 1fr;
+   place-items: center;
+
+   background: var(--color-secondary);
+
+   & > button {
+   }
+
+   & > nav {
+      display: grid;
+      gap: 2rem;
+   }
+}

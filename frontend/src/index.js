@@ -1,3 +1,3 @@
 import './styles.scss';
 import './js/router/router';
-import './js/components/Header';
+import './js/components/Menu';
