@@ -2,5 +2,5 @@ module.exports = {
    transform: {
       '^.+\\.(js|jsx|ts|tsx|mjs)$': 'babel-jest',
    },
-   coverageReporters: ['json'],
+   coverageReporters: ['json', 'text'],
 };
