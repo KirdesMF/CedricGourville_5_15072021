@@ -68,10 +68,15 @@ function clear() {
    localStorage.clear();
 }
 
+function cleanShoppingCart(category) {
+   localStorage.removeItem(category);
+}
+
 export const useStorage = {
    clear,
    addItem,
    removeItem,
    getCategory,
    getAllCategory,
+   cleanShoppingCart,
 };

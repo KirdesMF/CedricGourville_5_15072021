@@ -3,6 +3,7 @@ import { Error404 } from '../views/Error404';
 import { Home } from '../views/Home';
 import { Product } from '../views/Product';
 import { ShoppingCart } from '../views/ShoppingCart';
+import { Success } from '../views/Success';
 
 function setDocumentTitle(title) {
    document.title = title;
@@ -56,6 +57,7 @@ const routes = [
       component: ShoppingCart,
       title: 'Oricono - Shopping Cart ',
    },
+   { path: '/success', component: Success, title: 'Orinoco - Success' },
    { path: '/error', component: Error404, title: 'Orinoco - Error' },
 ];
 
@@ -72,6 +74,10 @@ async function renderView() {
       }
       if (path.includes('/shopping-cart')) {
          return route.path === '/shopping-cart';
+      }
+
+      if (path.includes('/success')) {
+         return route.path === '/success';
       }
       return route.path === path || route.path === '/error';
    });

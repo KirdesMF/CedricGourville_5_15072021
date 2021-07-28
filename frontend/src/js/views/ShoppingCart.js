@@ -6,9 +6,7 @@ export const ShoppingCart = {
    render: async () => {
       const category = history.state.category;
       const datas = useStorage.getCategory(category);
-      const form = await FormCart();
-
-      console.log(datas, `cat: ${category}`);
+      const form = await FormCart.render();
 
       return /* html */ `
          <section class="shopping-cart panel h100 grid-flow grid-center">
@@ -32,7 +30,10 @@ export const ShoppingCart = {
                </tbody>
             </table>
          </section>
-         <section class="panel" >${form}</section>
+         <section class="panel">${form}</section>
       `;
+   },
+   set: () => {
+      FormCart.set();
    },
 };

@@ -1,3 +1,5 @@
+import { useStorage } from './local-storage';
+
 export async function getDatasApi(path) {
    try {
       const res = await fetch(`http://localhost:3000/api/${path}`);
@@ -28,34 +30,18 @@ export async function getImagesApi(path, id) {
    }
 }
 
-const options = {
-   method: 'post',
-   body: 'test',
-   headers: new Headers({
-      'Content-Type': 'application/json',
-   }),
-};
-
-export async function postCommand(path) {
-   const testData = {
-      contact: {
-         firstName: 'jean',
-         lastName: 'jardin',
-         address: 'ok',
-         city: 'Paris',
-         email: '',
-      },
-      products: [],
-   };
-   try {
-      const res = await fetch(`http://localhost:3000/api/${path}/order/`, {
-         method: 'POST',
-         body: JSON.stringify(testData),
-         headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      });
-
-      const json = await res.json();
-   } catch (error) {
-      console.log(`bad ${error}`);
-   }
+/**
+ *
+ * @param {*} category
+ * @param {*} order
+ */
+export function postCommand(category, order) {
+   fetch(`http://localhost:3000/api/${category}/order`, {
+      method: 'POST',
+      body: JSON.stringify(order),
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+   })
+      .then((res) => res.json())
+      .then(() => useStorage.cleanShoppingCart(category))
+      .catch((err) => alert(err));
 }

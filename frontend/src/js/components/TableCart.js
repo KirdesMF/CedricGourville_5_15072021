@@ -2,10 +2,12 @@ import { formatPrice } from '../utils/utils';
 
 export function TableCart({ name, id, option, quantity, price }) {
    const totalPrice = quantity * Number(price);
+   const category = window.history.state.category;
    return /* html */ `
       <tr>
-         <td>${name}</td>
-         <td>${id}</td>
+         <td>
+            <a href="/${category}?id=${id}" data-router="true">${name}</a>
+         </td>
          <td>${quantity}</td>
          <td>${formatPrice(price)}</td>
          <td>
