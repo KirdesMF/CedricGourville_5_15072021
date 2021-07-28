@@ -7,32 +7,15 @@ export const ShoppingCart = {
       const category = history.state.category;
       const datas = useStorage.getCategory(category);
       const form = await FormCart.render();
+      const table = TableCart(datas);
+
+      console.log(process.env.HOST);
 
       if (datas && !datas.length) return `<div>YOUR CART IS EMPTY</div>`;
 
       return /* html */ `
          <section class="shopping-cart panel h100 grid-flow grid-center">
-            <div class="wrapper" >
-               <table>
-                  <thead>
-                     <tr>
-                        <th colspan="100">Shopping Cart ${category}</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     ${datas
-                        .map((d) =>
-                           TableCart({
-                              name: d.name,
-                              id: d.id,
-                              quantity: d.quantity,
-                              price: d.price,
-                           })
-                        )
-                        .join('')}
-                  </tbody>
-               </table>
-            </div>
+            ${table}
          </section>
          <section class="panel">${form}</section>
       `;

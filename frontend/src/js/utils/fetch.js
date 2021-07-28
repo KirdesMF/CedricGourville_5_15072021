@@ -27,7 +27,7 @@ export async function getDatasApi(path) {
  */
 export async function getImagesApi(path, id) {
    try {
-      const res = await fetch(`http://localhost:3000/api/${path}/${id}`);
+      const res = await fetch(`${process.env.HOST}/api/${path}/${id}`);
 
       if (!res.ok) {
          console.log(res.status);
