@@ -3,14 +3,18 @@
  * @param {string} key
  * @returns
  */
-function getItem(key) {
+function getCategory(key) {
    return JSON.parse(localStorage.getItem(key)) || [];
 }
 
 function getAllCategory() {
-   for (let [key, value] of Object.entries(localStorage)) {
-      console.log(JSON.parse(value));
-   }
+   return Object.entries(localStorage).reduce(
+      (acc, [key, value]) => ({
+         ...acc,
+         [key]: JSON.parse(value),
+      }),
+      {}
+   );
 }
 
 /**
@@ -19,7 +23,7 @@ function getAllCategory() {
  * @param {object} items
  */
 function addItem({ key, name, quantity, price, id, option }) {
-   const category = getItem(key);
+   const category = getCategory(key);
    const item = category.find((cat) => cat.name === name);
 
    if (item) {
@@ -43,7 +47,7 @@ function addItem({ key, name, quantity, price, id, option }) {
 }
 
 function removeItem(key, quantity) {
-   const items = getItem(key);
+   const items = getCategory(key);
    const item = items.find((i) => i.name === key);
 
    if (!item) {
@@ -68,6 +72,6 @@ export const useStorage = {
    clear,
    addItem,
    removeItem,
-   getItem,
+   getCategory,
    getAllCategory,
 };

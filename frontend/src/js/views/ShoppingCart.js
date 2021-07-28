@@ -1,6 +1,15 @@
+import { FormCart } from '../components/FormCart';
+import { TableCart } from '../components/TableCart';
+import { useStorage } from '../utils/local-storage';
+
 export const ShoppingCart = {
-   render: () => {
+   render: async () => {
       const category = history.state.category;
+      const datas = useStorage.getCategory(category);
+      const form = await FormCart();
+
+      console.log(datas, `cat: ${category}`);
+
       return /* html */ `
          <section class="shopping-cart panel h100 grid-flow grid-center">
             <table>
@@ -10,21 +19,20 @@ export const ShoppingCart = {
                   </tr>
                </thead>
                <tbody>
-                  <tr>
-                     <td>Produit</td>
-                     <td>id</td>
-                     <td>option</td>
-                     <td>quantity</td>
-                     <td>unique price</td>
-                     <td>
-                     <button>+</button>
-                     <button>-</button>
-                     </td>
-                     <td>total price</td>
-                  </tr>
+                  ${datas
+                     .map((d) =>
+                        TableCart({
+                           name: d.name,
+                           id: d.id,
+                           quantity: d.quantity,
+                           price: d.price,
+                        })
+                     )
+                     .join('')}
                </tbody>
             </table>
          </section>
+         <section class="panel" >${form}</section>
       `;
    },
 };

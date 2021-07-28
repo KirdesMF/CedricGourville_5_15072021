@@ -55,6 +55,7 @@ export const Product = {
 
       btn.addEventListener('click', (e) => {
          e.preventDefault();
+
          const datas = {
             key: key,
             id: product.getAttribute('data-id'),
