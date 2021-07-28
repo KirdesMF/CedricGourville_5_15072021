@@ -12,7 +12,7 @@ function updateLinkShoppingCart() {
    const link = document.querySelector('#shopping-link');
 
    const path = window.location.pathname;
-   const category = history.state.category || '';
+   const category = history.state?.category ?? 'all';
 
    if (path === '/') link.setAttribute('href', `/all/shopping-cart`);
    else link.setAttribute('href', `/${category}/shopping-cart`);
