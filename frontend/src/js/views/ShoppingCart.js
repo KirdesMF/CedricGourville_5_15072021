@@ -5,11 +5,9 @@ import { useStorage } from '../utils/local-storage';
 export const ShoppingCart = {
    render: async () => {
       const category = history.state.category;
-      const datas = useStorage.getCategory(category);
+      const datas = useStorage.getProductFromCategory(category);
       const form = await FormCart.render();
       const table = TableCart(datas);
-
-      console.log(process.env.HOST);
 
       if (datas && !datas.length) return `<div>YOUR CART IS EMPTY</div>`;
 
@@ -22,7 +20,7 @@ export const ShoppingCart = {
    },
    set: () => {
       const category = history.state.category;
-      const datas = useStorage.getCategory(category);
+      const datas = useStorage.getProductFromCategory(category);
       if (datas && datas.length) FormCart.set();
    },
 };

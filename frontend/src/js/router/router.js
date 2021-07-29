@@ -1,4 +1,4 @@
-import { Article } from '../views/Article';
+import { Category } from '../views/Category';
 import { Error404 } from '../views/Error404';
 import { Home } from '../views/Home';
 import { Product } from '../views/Product';
@@ -46,9 +46,9 @@ export function setLinkRouter() {
 
 const routes = [
    { path: '/', component: Home, title: 'Oricono - Home' },
-   { path: '/teddies', component: Article, title: 'Oricono - Teddies' },
-   { path: '/cameras', component: Article, title: 'Oricono - Cameras' },
-   { path: '/furniture', component: Article, title: 'Oricono - Furniture' },
+   { path: '/teddies', component: Category, title: 'Oricono - Teddies' },
+   { path: '/cameras', component: Category, title: 'Oricono - Cameras' },
+   { path: '/furniture', component: Category, title: 'Oricono - Furniture' },
    { path: '/product', component: Product, title: 'Oricono - Product' },
    {
       path: '/shopping-cart',

@@ -1,4 +1,5 @@
-import { postCommand } from '../utils/fetch';
+import { postOrder } from '../utils/fetch';
+import { checkInputEmail } from '../utils/form';
 import { useStorage } from '../utils/local-storage';
 
 const INPUTS = [
@@ -13,7 +14,7 @@ const INPUTS = [
 export const FormCart = {
    render: async () => {
       return /*html */ `
-         <form action="/success" method="POST"  class="grid-flow form-cart" >
+         <form action="/success" method="POST"  class="grid-flow form-cart">
             ${INPUTS.map((input) => {
                return /*html */ `
                   <div>
@@ -53,7 +54,7 @@ export const FormCart = {
             products: products,
          };
 
-         postCommand(category, order);
+         postOrder(category, order);
       });
    },
 };

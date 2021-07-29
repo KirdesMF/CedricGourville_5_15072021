@@ -2,10 +2,10 @@ import { useStorage } from './local-storage';
 
 /**
  *
- * @param {string} path
+ * @param {string} category
  * @returns
  */
-export async function getDatasApi(category) {
+export async function getAllProductsFromAPI(category) {
    try {
       const res = await fetch(`${process.env.HOST}/api/${category}`);
       if (!res.ok) {
@@ -21,13 +21,14 @@ export async function getDatasApi(category) {
 
 /**
  *
- * @param {string} path
+ * @param {string} category
  * @param {string} id
  * @returns
  */
-export async function getImagesApi(category, id) {
+export async function getProductFromAPI(category, id) {
+   const url = `${process.env.HOST}/api/${category}/${id}`;
    try {
-      const res = await fetch(`${process.env.HOST}/api/${category}/${id}`);
+      const res = await fetch(url);
 
       if (!res.ok) {
          console.log(res.status);
@@ -46,7 +47,7 @@ export async function getImagesApi(category, id) {
  * @param {string} category
  * @param {object} order
  */
-export function postCommand(category, order) {
+export function postOrder(category, order) {
    fetch(`${process.env.HOST}/api/${category}/order`, {
       method: 'POST',
       body: JSON.stringify(order),

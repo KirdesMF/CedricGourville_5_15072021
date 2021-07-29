@@ -2,7 +2,6 @@ import { formatPrice } from '../utils/utils';
 
 export function TableCart(datas) {
    const category = window.history.state.category;
-
    const total = datas
       .map((d) => d.quantity * Number(d.price))
       .reduce((a, b) => a + b, 0);

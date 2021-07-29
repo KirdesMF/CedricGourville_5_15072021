@@ -19,12 +19,12 @@ const options = {
 
 /**
  *
- * @param {keyof options} path
+ * @param {keyof options} category
  * @returns string
  * @description used to get the options array
  */
-export function getOptionsFromDatas(path) {
-   return options[path];
+export function getOptionsFromDatas(category) {
+   return options[category];
 }
 
 /**

@@ -1,4 +1,4 @@
-import { getImagesApi } from '../utils/fetch';
+import { getProductFromAPI } from '../utils/fetch';
 import { useStorage } from '../utils/local-storage';
 import { formatPrice, getOptionsFromDatas } from '../utils/utils';
 
@@ -6,9 +6,9 @@ export const Product = {
    render: async () => {
       const href = window.location.href;
       const id = new URL(href).searchParams.get('id');
-      const path = window.location.pathname.replaceAll('/', '');
-      const keyOptions = getOptionsFromDatas(path);
-      const datas = await getImagesApi(path, id);
+      const category = window.history.state.category;
+      const keyOptions = getOptionsFromDatas(category);
+      const datas = await getProductFromAPI(category, id);
       const formatedPrice = formatPrice(datas.price);
 
       const options = datas[keyOptions].map(
@@ -32,13 +32,10 @@ export const Product = {
                      <b>
                         ${formatedPrice}
                      </b>
-                     <form action="">
-                        <input data-cart="quantity" type="number" max="99" min="1" value="1" />
-                        <select data-cart="options" >
-                           ${options}
-                        </select>
-                        <button type="submit" data-cart="btn" >Add to cart</button>
-                     </form>
+                     <select data-cart="options" >
+                        ${options}
+                     </select>
+                     <button data-cart="btn" >Add to cart</button>
                   </div>
                </div>
             </div>
@@ -51,13 +48,13 @@ export const Product = {
       const input = document.querySelector(`[data-cart="quantity"]`);
       const select = document.querySelector(`[data-cart="options"]`);
       const product = document.querySelector('[data-id]');
-      const key = window.history.state.category;
+      const category = window.history.state.category;
 
       btn.addEventListener('click', (e) => {
          e.preventDefault();
 
          const datas = {
-            key: key,
+            category: category,
             id: product.getAttribute('data-id'),
             name: product.getAttribute('data-name'),
             price: product.getAttribute('data-price'),
