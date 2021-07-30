@@ -24,6 +24,7 @@ const routes = [
 function updateLinkShoppingCart() {
    const link = document.querySelector('#shopping-link');
    const category = history.state.category;
+   const info = document.querySelector('[data-cart="info"]');
 
    link.setAttribute('href', `/${category}/shopping-cart`);
 }

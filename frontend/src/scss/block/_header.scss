@@ -26,5 +26,13 @@
             fill: var(--color-primary);
          }
       }
+
+      & #shopping-link {
+         position: relative;
+      }
+
+      & [data-cart='info'] {
+         position: absolute;
+      }
    }
 }

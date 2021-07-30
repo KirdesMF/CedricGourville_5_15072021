@@ -133,8 +133,6 @@ export const TableCart = {
 
          row.addEventListener('click', (event) => {
             if (event.target.matches('[data-cart="remove"]')) {
-               const btn = event.target;
-
                const datas = {
                   category,
                   id: row.dataset.id,
