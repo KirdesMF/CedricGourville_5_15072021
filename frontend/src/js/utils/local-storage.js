@@ -1,7 +1,17 @@
 /**
+ * @typedef {object} Product
+ * @property {number} quantity
+ * @property {string} category
+ * @property {string} name
+ * @property {string} price
+ * @property {string} id
+ * @property {string} option
+ **/
+
+/**
  *
  * @param {string} category
- * @returns
+ * @returns {([] | Product[])}
  */
 function getProductFromCategory(category) {
    return JSON.parse(localStorage.getItem(category)) || [];
@@ -9,49 +19,49 @@ function getProductFromCategory(category) {
 
 /**
  *
- * @param {string} category
- * @param {object} items
+ * @param {Product} product
+ *
  */
-function addItem({ category, name, quantity, price, id, option }) {
+function addItem(product) {
+   const { category, name, quantity, option } = product;
+
    const items = getProductFromCategory(category);
-   const item = items.find((cat) => cat.name === name);
+   const item = items.find((i) => i.name === name && i.option === option);
 
-   if (item) {
+   if (!item) items.push(product);
+
+   if (item && item.quantity < 10) {
       item.quantity += quantity;
-
-      const optionItem = item.options.find((i) => i.name === option.name);
-
-      optionItem
-         ? (optionItem.quantity += quantity)
-         : item.options.push(option);
-   } else {
-      items.push({
-         name,
-         price,
-         quantity,
-         id,
-         options: [{ ...option }],
-      });
    }
+
+   if (item && item.quantity >= 10) {
+      item.quantity = 10;
+      alert('10 max bro');
+   }
+
    localStorage.setItem(category, JSON.stringify(items));
 }
 
-function removeItem(key, quantity) {
-   const items = getProductFromCategory(key);
-   const item = items.find((i) => i.name === key);
+/**
+ *
+ * @param {Product} product
+ *
+ */
+function removeItem(product) {
+   const { category, name, quantity, option } = product;
+   const items = getProductFromCategory(category);
+   const item = items.find((i) => i.name === name && i.option === option);
+   const cleanedItems = items.filter((i) => i.quantity !== 0);
 
-   if (!item) {
-      return;
-   } else {
-      item.quantity -= quantity;
-   }
+   if (!item) return;
+
+   if (item) item.quantity -= quantity;
 
    if (item.quantity <= 0) {
       item.quantity = 0;
-      localStorage.removeItem(key);
-   } else {
-      localStorage.setItem(key, JSON.stringify(items));
    }
+
+   localStorage.setItem(category, JSON.stringify(cleanedItems));
 }
 
 function clear() {

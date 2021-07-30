@@ -1,5 +1,4 @@
 import { postOrder } from '../utils/fetch';
-import { checkInputEmail } from '../utils/form';
 import { useStorage } from '../utils/local-storage';
 
 const INPUTS = [
@@ -27,11 +26,17 @@ export const FormCart = {
          </form>
       `;
    },
-   set: () => {
+   /**
+    *
+    * @param {Product[] | []} datas
+    * @param {string} category
+    * @returns
+    */
+   set: (category, datas) => {
       const form = document.querySelector('form');
-      const category = window.history.state.category;
-      const datas = useStorage.getCategory(category);
       const products = datas.map((d) => d.id);
+
+      const inputs = document.querySelectorAll('form input');
 
       const firstName = document.getElementById('firstName');
       const lastName = document.getElementById('lastName');

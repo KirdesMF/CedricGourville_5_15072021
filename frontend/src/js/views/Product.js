@@ -7,6 +7,7 @@ export const Product = {
       const href = window.location.href;
       const id = new URL(href).searchParams.get('id');
       const category = window.history.state.category;
+
       const keyOptions = getOptionsFromDatas(category);
       const datas = await getProductFromAPI(category, id);
       const formatedPrice = formatPrice(datas.price);
@@ -45,7 +46,6 @@ export const Product = {
 
    set: () => {
       const btn = document.querySelector(`[data-cart="btn"]`);
-      const input = document.querySelector(`[data-cart="quantity"]`);
       const select = document.querySelector(`[data-cart="options"]`);
       const product = document.querySelector('[data-id]');
       const category = window.history.state.category;
@@ -58,8 +58,8 @@ export const Product = {
             id: product.getAttribute('data-id'),
             name: product.getAttribute('data-name'),
             price: product.getAttribute('data-price'),
-            quantity: input.valueAsNumber,
-            option: { name: select.value, quantity: input.valueAsNumber },
+            quantity: 1,
+            option: select.value,
          };
 
          useStorage.addItem(datas);
