@@ -44,13 +44,13 @@ export const TableCart = {
 
       const rows = datas
          .map((data) => {
-            const { quantity, price, id, name, option } = data;
+            const { quantity, price, id, name, option, category } = data;
             const totalPrice = quantity * Number(price);
             const href = `/${category}?id=${id}`;
             const select = Select(quantity);
 
             return /* html */ `
-               <tr data-id="${id}" data-name="${name}" data-option="${option}" data-quantity="${quantity}" >
+               <tr data-category="${category}" data-id="${id}" data-name="${name}" data-option="${option}" data-quantity="${quantity}" >
                   <td>
                      <a href="${href}" data-router >${name}</a>
                   </td>
@@ -107,7 +107,6 @@ export const TableCart = {
     */
    set: () => {
       const rows = document.querySelectorAll('tr[data-id]');
-      const category = window.history.state.category;
 
       for (const row of rows) {
          row.addEventListener('change', (event) => {
@@ -115,7 +114,7 @@ export const TableCart = {
                const select = event.target;
 
                const datas = {
-                  category,
+                  category: row.dataset.category,
                   id: row.dataset.id,
                   name: row.dataset.name,
                   option: row.dataset.option,
@@ -132,7 +131,7 @@ export const TableCart = {
          row.addEventListener('click', (event) => {
             if (event.target.matches('[data-cart="remove"]')) {
                const datas = {
-                  category,
+                  category: row.dataset.category,
                   id: row.dataset.id,
                   name: row.dataset.name,
                   option: row.dataset.option,
