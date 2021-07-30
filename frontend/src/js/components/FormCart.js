@@ -35,6 +35,9 @@ export const FormCart = {
    set: (category, datas) => {
       const form = document.querySelector('form');
       const products = datas.map((d) => d.id);
+      const total = datas
+         .map((d) => d.quantity * Number(d.price))
+         .reduce((a, b) => a + b, 0);
 
       const inputs = document.querySelectorAll('form input');
 
@@ -60,6 +63,7 @@ export const FormCart = {
          };
 
          postOrder(category, order);
+         sessionStorage.setItem(`${category}-total`, total);
       });
    },
 };

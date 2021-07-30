@@ -55,9 +55,13 @@ export function postOrder(category, order) {
    })
       .then((res) => res.json())
       .then((json) => {
-         console.log(json);
+         sessionStorage.setItem('orderId', json.orderId);
          useStorage.cleanCategory(category);
-         // window.location.href = '/success';
+
+         window.history.pushState({ category }, '', `/${category}/success`);
+
+         const customEvent = new Event('update');
+         window.dispatchEvent(customEvent);
       })
       .catch((err) => alert(err));
 }

@@ -42,8 +42,6 @@ export const TableCart = {
          .map((d) => d.quantity * Number(d.price))
          .reduce((a, b) => a + b, 0);
 
-      console.log(datas);
-
       const rows = datas
          .map((data) => {
             const { quantity, price, id, name, option } = data;
