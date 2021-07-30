@@ -62,7 +62,18 @@ export const TableCart = {
                   <td>${select}</td>
                   <td>${formatPrice(totalPrice)}</td>
                   <td>
-                     <button data-cart="remove">delete</button>
+                     <button data-cart="remove">
+                        <span>
+                           <svg
+                              class="svg-icon"
+                              focusable="false"
+                              role="img"
+                              aria-hidden="true"
+                           >
+                              <use href="#trash-icon" />
+                           </svg>
+                        </span>
+                     </button>
                   </td>
                </tr>
             `;
