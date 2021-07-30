@@ -3,8 +3,11 @@ import { TableCart } from '../components/TableCart';
 import { useStorage } from '../utils/local-storage';
 
 const EmptyCart = (category) => {
-   return `
-      <div>YOUR ${category} CART IS EMPTY</div>
+   return /* html */ `
+      <div>
+         <h1>YOUR ${category} CART IS EMPTY</h1>
+         <a data-router href="/${category === 'all' ? '' : category}">Back</a>
+      </div>
    `;
 };
 

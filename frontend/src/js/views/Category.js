@@ -35,7 +35,10 @@ export const Category = {
       return /* html */ `
          <section class="article panel h100 grid grid-center">
             <div class="wrapper grid-flow" id="myContainer">
-               <h1>${category}</h1>
+               <div>
+                  <h1>${category}</h1>
+                  <a href="/" data-router>Back</a>
+               </div>
                <div class="article__grid">${cards}</div>
             </div>
          </section>

@@ -60,11 +60,10 @@ function transitionView(onFinish) {
 const navigate = (event) => {
    event.preventDefault();
 
-   const path = window.location.pathname;
    const href = event.target.getAttribute('href');
    const category = setPathToCategory(event.target.pathname);
 
-   if (path === href) return;
+   if (location.href === event.target.href) return;
 
    transitionView(() => {
       window.history.pushState({ category: category }, '', href);

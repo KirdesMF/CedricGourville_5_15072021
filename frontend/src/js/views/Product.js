@@ -29,6 +29,7 @@ export const Product = {
                   />
                   <div class="product__content" >
                      <h1>${datas.name}</h1>
+                     <a href="/${category}" data-router>Back</a>
                      <p>${datas.description}</p>
                      <b>
                         ${formatedPrice}
