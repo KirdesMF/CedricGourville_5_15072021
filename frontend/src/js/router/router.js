@@ -1,4 +1,4 @@
-import { setPathToCategory } from '../utils/utils';
+import { parseStringToNumber, setPathToCategory } from '../utils/utils';
 import { Category } from '../views/Category';
 import { Error404 } from '../views/Error404';
 import { Home } from '../views/Home';
@@ -35,6 +35,27 @@ async function setHistoryCategory() {
    window.history.pushState({ category: category }, '');
 }
 
+//TODO improve how to handle transition
+/**
+ *
+ * @param {() => void} onFinish
+ */
+function transitionView(onFinish) {
+   const app = document.getElementById('app');
+
+   const transition = getComputedStyle(app).getPropertyValue('--transition');
+
+   const add = () => app.classList.add('transition');
+   const remove = () => app.classList.remove('transition');
+
+   add();
+
+   setTimeout(() => {
+      onFinish();
+      remove();
+   }, parseStringToNumber(transition));
+}
+
 const navigate = (event) => {
    event.preventDefault();
 
@@ -44,8 +65,10 @@ const navigate = (event) => {
 
    if (path === href) return;
 
-   window.history.pushState({ category: category }, '', href);
-   rerender();
+   transitionView(() => {
+      window.history.pushState({ category: category }, '', href);
+      rerender();
+   });
 };
 
 function setLinkRouter() {
@@ -61,6 +84,7 @@ function setLinkRouter() {
    });
 }
 
+//TODO improve render view check string
 async function renderView() {
    const app = document.getElementById('app');
    const path = window.location.pathname;
