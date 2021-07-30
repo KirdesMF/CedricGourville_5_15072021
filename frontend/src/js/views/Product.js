@@ -55,9 +55,9 @@ export const Product = {
 
          const datas = {
             category: category,
-            id: product.getAttribute('data-id'),
-            name: product.getAttribute('data-name'),
-            price: product.getAttribute('data-price'),
+            id: product.dataset.id,
+            name: product.dataset.name,
+            price: product.dataset.price,
             quantity: 1,
             option: select.value,
          };

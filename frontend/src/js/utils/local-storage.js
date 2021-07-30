@@ -3,7 +3,7 @@
  * @property {number} quantity
  * @property {string} category
  * @property {string} name
- * @property {string} price
+ * @property {string} [price]
  * @property {string} id
  * @property {string} option
  **/
@@ -42,6 +42,17 @@ function addItem(product) {
    localStorage.setItem(category, JSON.stringify(items));
 }
 
+function updateItem(product) {
+   const { category, name, quantity, option } = product;
+
+   const items = getProductFromCategory(category);
+   const item = items.find((i) => i.name === name && i.option === option);
+
+   item.quantity = quantity;
+
+   localStorage.setItem(category, JSON.stringify(items));
+}
+
 /**
  *
  * @param {Product} product
@@ -75,6 +86,7 @@ function cleanCategory(category) {
 export const useStorage = {
    clear,
    addItem,
+   updateItem,
    removeItem,
    getProductFromCategory,
    cleanCategory,

@@ -1,5 +1,5 @@
 import { useStorage } from '../utils/local-storage';
-import { formatPrice } from '../utils/utils';
+import { formatPrice, parseStringToNumber } from '../utils/utils';
 /**
  * @typedef {object} Product
  * @property {number} quantity
@@ -10,10 +10,30 @@ import { formatPrice } from '../utils/utils';
  * @property {string} option
  **/
 
+/**
+ *
+ * @param {number} quantity
+ * @returns
+ */
+const Select = (quantity) => {
+   return /* html */ `
+      <select data-cart="select" >
+         ${Array.from({ length: 10 }, (_, k) => {
+            const selected = quantity === k + 1 ? 'selected' : '';
+            return `
+               <option ${selected} value="${k + 1}" >
+                  ${k + 1}
+               </option>
+            `;
+         }).join('')}
+      </select>
+   `;
+};
+
 export const TableCart = {
    /**
     *
-    * @param {Product[] | []} datas
+    * @param {Product[]} datas
     * @param {string} category
     * @returns
     */
@@ -27,19 +47,17 @@ export const TableCart = {
             const { quantity, price, id, name, option } = data;
             const totalPrice = quantity * Number(price);
             const href = `/${category}?id=${id}`;
+            const select = Select(quantity);
 
             return /* html */ `
-               <tr data-id="${id}"  data-name="${name}" data-option="${option}" data-quantity="${quantity}" >
+               <tr data-id="${id}" data-name="${name}" data-option="${option}" data-quantity="${quantity}" >
                   <td>
                      <a href="${href}" data-router >${name}</a>
                   </td>
                   <td>${option}</td>
                   <td>${quantity}</td>
                   <td>${formatPrice(price)}</td>
-                  <td>
-                     <button data-cart="add" > + </button>
-                     <button data-cart="remove" > - </button>
-                  </td>
+                  <td>${select}</td>
                   <td>${formatPrice(totalPrice)}</td>
                </tr>
             `;
@@ -73,5 +91,29 @@ export const TableCart = {
     * @param {string} category
     * @returns
     */
-   set: () => {},
+   set: () => {
+      const rows = document.querySelectorAll('tr[data-id]');
+      const category = window.history.state.category;
+
+      for (const row of rows) {
+         row.addEventListener('change', (event) => {
+            if (event.target.matches('[data-cart="select"]')) {
+               const select = event.target;
+
+               const datas = {
+                  category,
+                  id: row.dataset.id,
+                  name: row.dataset.name,
+                  option: row.dataset.option,
+                  quantity: parseStringToNumber(select.value),
+               };
+
+               useStorage.updateItem(datas);
+
+               const customEvent = new Event('update');
+               window.dispatchEvent(customEvent);
+            }
+         });
+      }
+   },
 };

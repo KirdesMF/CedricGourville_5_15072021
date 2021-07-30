@@ -5,45 +5,6 @@ import { Product } from '../views/Product';
 import { ShoppingCart } from '../views/ShoppingCart';
 import { Success } from '../views/Success';
 
-function setDocumentTitle(title) {
-   document.title = title;
-}
-
-function updateLinkShoppingCart() {
-   const link = document.querySelector('#shopping-link');
-
-   const path = window.location.pathname;
-   const category = history.state?.category ?? 'all';
-
-   if (path === '/') link.setAttribute('href', `/all/shopping-cart`);
-   else link.setAttribute('href', `/${category}/shopping-cart`);
-}
-
-const handleAnchor = (event) => {
-   event.preventDefault();
-
-   const path = window.location.pathname;
-   const href = event.target.getAttribute('href');
-   const category = event.target.pathname.split('/')[1];
-
-   if (path === href) return;
-
-   window.history.pushState({ category: category }, '', href);
-   renderView();
-};
-
-export function setLinkRouter() {
-   const anchors = document.querySelectorAll(`[data-router]`);
-   anchors.forEach((anchor) => {
-      if (anchor.hasAttribute('data-event')) {
-         return;
-      } else {
-         anchor.addEventListener('click', handleAnchor);
-         anchor.setAttribute('data-event', 'true');
-      }
-   });
-}
-
 const routes = [
    { path: '/', component: Home, title: 'Oricono - Home' },
    { path: '/teddies', component: Category, title: 'Oricono - Teddies' },
@@ -59,17 +20,52 @@ const routes = [
    { path: '/error', component: Error404, title: 'Orinoco - Error' },
 ];
 
+function updateLinkShoppingCart() {
+   const link = document.querySelector('#shopping-link');
+
+   const path = window.location.pathname;
+   const category = history.state.category;
+
+   if (path === '/') link.setAttribute('href', `/all/shopping-cart`);
+   else link.setAttribute('href', `/${category}/shopping-cart`);
+}
+
+const navigate = (event) => {
+   event.preventDefault();
+
+   const path = window.location.pathname;
+   const href = event.target.getAttribute('href');
+   const category = event.target.pathname.split('/')[1];
+
+   if (path === href) return;
+
+   window.history.pushState({ category: category }, '', href);
+   rerender();
+};
+
+export function setLinkRouter() {
+   const anchors = document.querySelectorAll(`[data-router]`);
+
+   anchors.forEach((anchor) => {
+      const hasEvent = anchor.hasAttribute('data-event');
+
+      if (hasEvent) return;
+
+      anchor.addEventListener('click', navigate);
+      anchor.setAttribute('data-event', 'true');
+   });
+}
+
 async function renderView() {
    const app = document.getElementById('app');
    const path = window.location.pathname;
    const href = window.location.href;
 
-   // check the path
    const { component, title } = routes.find((route) => {
-      // product comp
       if (href.includes('?id=')) {
          return route.path === '/product';
       }
+
       if (path.includes('/shopping-cart')) {
          return route.path === '/shopping-cart';
       }
@@ -82,15 +78,34 @@ async function renderView() {
    });
 
    app.innerHTML = await component.render();
-   if ('set' in component) {
-      component.set();
-   }
+   if ('set' in component) component.set();
+   document.title = title;
+}
 
-   setDocumentTitle(title);
+async function setHistoryCategory() {
+   const path = window.location.pathname;
+   const category = path.split('/')[1] === '' ? 'all' : path.split('/')[1];
+
+   window.history.pushState({ category: category }, '');
+}
+
+async function init() {
+   await setHistoryCategory();
+   await renderView();
    setLinkRouter();
    updateLinkShoppingCart();
 }
 
-['popstate', 'load'].forEach((event) =>
-   window.addEventListener(event, renderView)
+async function rerender() {
+   await renderView();
+   setLinkRouter();
+   updateLinkShoppingCart();
+}
+
+['popstate', 'update'].forEach((event) =>
+   window.addEventListener(event, rerender)
 );
+
+window.addEventListener('load', () => {
+   init();
+});
