@@ -59,18 +59,14 @@ function updateItem(product) {
  *
  */
 function removeItem(product) {
-   const { category, name, quantity, option } = product;
+   const { category, name, option } = product;
    const items = getProductFromCategory(category);
+
    const item = items.find((i) => i.name === name && i.option === option);
-   const cleanedItems = items.filter((i) => i.quantity !== 0);
 
-   if (!item) return;
-
-   if (item) item.quantity -= quantity;
-
-   if (item.quantity <= 0) {
-      item.quantity = 0;
-   }
+   const cleanedItems = items.filter(
+      (el) => el.name != item.name || el.option != item.option
+   );
 
    localStorage.setItem(category, JSON.stringify(cleanedItems));
 }

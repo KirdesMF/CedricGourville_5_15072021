@@ -42,6 +42,8 @@ export const TableCart = {
          .map((d) => d.quantity * Number(d.price))
          .reduce((a, b) => a + b, 0);
 
+      console.log(datas);
+
       const rows = datas
          .map((data) => {
             const { quantity, price, id, name, option } = data;
@@ -59,6 +61,9 @@ export const TableCart = {
                   <td>${formatPrice(price)}</td>
                   <td>${select}</td>
                   <td>${formatPrice(totalPrice)}</td>
+                  <td>
+                     <button data-cart="remove">delete</button>
+                  </td>
                </tr>
             `;
          })
@@ -70,7 +75,7 @@ export const TableCart = {
          <table>
             <thead>
                <tr>
-                  <th colspan="5">Shopping Cart ${category}</th>
+                  <th colspan="100">Shopping Cart ${category}</th>
                </tr>
             </thead>
             <tbody>
@@ -78,7 +83,7 @@ export const TableCart = {
             </tbody>
             <tfoot>
                <tr>
-                  <th colspan="4">Total</th>
+                  <th colspan="90">Total</th>
                   <td>${formatPrice(total)}</td>
                </tr>
             </tfoot>
@@ -109,6 +114,24 @@ export const TableCart = {
                };
 
                useStorage.updateItem(datas);
+
+               const customEvent = new Event('update');
+               window.dispatchEvent(customEvent);
+            }
+         });
+
+         row.addEventListener('click', (event) => {
+            if (event.target.matches('[data-cart="remove"]')) {
+               const btn = event.target;
+
+               const datas = {
+                  category,
+                  id: row.dataset.id,
+                  name: row.dataset.name,
+                  option: row.dataset.option,
+               };
+
+               useStorage.removeItem(datas);
 
                const customEvent = new Event('update');
                window.dispatchEvent(customEvent);

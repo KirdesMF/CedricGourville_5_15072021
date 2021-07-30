@@ -1,3 +1,4 @@
+import { setPathToCategory } from '../utils/utils';
 import { Category } from '../views/Category';
 import { Error404 } from '../views/Error404';
 import { Home } from '../views/Home';
@@ -22,12 +23,16 @@ const routes = [
 
 function updateLinkShoppingCart() {
    const link = document.querySelector('#shopping-link');
-
-   const path = window.location.pathname;
    const category = history.state.category;
 
-   if (path === '/') link.setAttribute('href', `/all/shopping-cart`);
-   else link.setAttribute('href', `/${category}/shopping-cart`);
+   link.setAttribute('href', `/${category}/shopping-cart`);
+}
+
+async function setHistoryCategory() {
+   const path = window.location.pathname;
+   const category = setPathToCategory(path);
+
+   window.history.pushState({ category: category }, '');
 }
 
 const navigate = (event) => {
@@ -35,7 +40,7 @@ const navigate = (event) => {
 
    const path = window.location.pathname;
    const href = event.target.getAttribute('href');
-   const category = event.target.pathname.split('/')[1];
+   const category = setPathToCategory(event.target.pathname);
 
    if (path === href) return;
 
@@ -43,7 +48,7 @@ const navigate = (event) => {
    rerender();
 };
 
-export function setLinkRouter() {
+function setLinkRouter() {
    const anchors = document.querySelectorAll(`[data-router]`);
 
    anchors.forEach((anchor) => {
@@ -82,13 +87,6 @@ async function renderView() {
    document.title = title;
 }
 
-async function setHistoryCategory() {
-   const path = window.location.pathname;
-   const category = path.split('/')[1] === '' ? 'all' : path.split('/')[1];
-
-   window.history.pushState({ category: category }, '');
-}
-
 async function init() {
    await setHistoryCategory();
    await renderView();
@@ -106,6 +104,4 @@ async function rerender() {
    window.addEventListener(event, rerender)
 );
 
-window.addEventListener('load', () => {
-   init();
-});
+window.addEventListener('load', init);

@@ -35,3 +35,12 @@ export function getOptionsFromDatas(category) {
 export function parseStringToNumber(text) {
    return parseInt(text, 10);
 }
+
+/**
+ *
+ * @param {string} pathname
+ */
+export function setPathToCategory(pathname) {
+   if (pathname === '/') return 'all';
+   return pathname.split('/')[1];
+}
