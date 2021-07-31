@@ -17,28 +17,35 @@ export const Product = {
       );
 
       return /*html */ `
-         <section class="product panel" >
+         <section class="product panel h100 grid grid-items-center" >
             <div class="wrapper">
-               <div class="product__inner" >
-                  <img 
-                     src="${datas.imageUrl}"
-                     alt="${datas.description}"
-                     data-name="${datas.name}"
-                     data-id="${datas._id}" 
-                     data-price="${datas.price}"
-                  />
-                  <div class="product__content" >
-                     <h1>${datas.name}</h1>
-                     <a href="/${category}" data-router>Back</a>
-                     <p>${datas.description}</p>
-                     <b>
-                        ${formatedPrice}
-                     </b>
-                     <select data-cart="options" >
-                        ${options}
-                     </select>
-                     <button data-cart="btn" >Add to cart</button>
-                  </div>
+               <div class="product__inner grid-flow">
+                  <a data-router href="/${category}">Back</a>
+
+                  <article class="product__card">
+                     <img 
+                        src="${datas.imageUrl}"
+                        alt="${datas.description}"
+                        data-name="${datas.name}"
+                        data-id="${datas._id}" 
+                        data-price="${datas.price}"
+                     />
+                     <div class="product__content grid-flow" >
+                        <h1>
+                           <span>${datas.name}</span>
+                           <b>${formatedPrice}</b>
+                        </h1>
+                        
+                        <p>${datas.description}</p>
+                        <select data-cart="options">
+                           ${options}
+                        </select>
+                        <div class="product__cta" >
+                           <button data-cart="btn" >Add to cart</button>
+                           <a href="/${category}/shopping-cart" data-router>Order it</a>
+                        </div>
+                     </div>
+                  </article>
                </div>
             </div>
          </section>

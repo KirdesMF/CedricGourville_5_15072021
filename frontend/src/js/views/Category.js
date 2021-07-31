@@ -37,9 +37,24 @@ export const Category = {
             <div class="wrapper grid-flow">
                <div class="category__title" >
                   <h1>${category}</h1>
-                  <a href="/" data-router>Back</a>
+                  <a href="/" data-router>
+                     <svg
+                        class="svg-icon"
+                        focusable="false"
+                        role="img"
+                        aria-hidden="true"
+                     >
+                        <use href="#chevron-icon" />
+                     </svg>
+                     Back
+                  </a>
                </div>
-               <div class="category__grid">${cards} <div>placeholder</div> </div>
+               <div class="category__grid">
+                  ${cards}
+                  <div class="category__placeholder">
+                     <h3>More to come</h3>
+                  </div>
+               </div>
             </div>
          </section>
       `;

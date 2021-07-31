@@ -1,48 +1,79 @@
 .product {
    &__inner {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: 1fr 1fr;
-
-      gap: 2rem;
       color: var(--color-text);
-
-      @media screen and (min-width: 768px) {
-         grid-template-columns: 1.5fr 1fr;
-         grid-template-rows: 40vh;
-         place-items: center;
-      }
    }
 
-   & img {
-      height: 100%;
-      width: 100%;
-      object-fit: contain;
+   &__card {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(30rem, 100%), 1fr));
+      gap: 1.5rem;
+
+      & img {
+         width: 100%;
+         object-fit: cover;
+         aspect-ratio: 4 / 3;
+         border: 2px solid white;
+         padding: 0.5rem;
+      }
    }
 
    &__content {
-      display: grid;
-      grid-auto-rows: max-content;
-      gap: 1.5rem;
+      & > h1 {
+         display: flex;
+         align-items: baseline;
+         gap: 1.5rem;
+
+         & > span {
+            font-size: 2.3rem;
+            font-family: Impact, 'Arial Narrow Bold', sans-serif;
+            font-weight: 500;
+         }
+
+         & > b {
+            color: var(--color-secondary);
+            font-size: 1rem;
+         }
+      }
 
       & > p {
-         max-width: 45ch;
-         align-self: center;
+         max-width: 50ch;
+         font-size: 1.2rem;
       }
 
-      & b {
-         color: var(--color-secondary);
+      & > select {
+         font-family: Consolas;
+         padding: 0.5rem;
+      }
+   }
+
+   &__cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+
+      & > a {
+         display: grid;
+         place-items: center;
+
+         background: var(--color-ternary);
+         text-decoration: none;
       }
 
-      & button {
-         place-self: center start;
-         padding: 0.75rem 2rem;
+      & > button {
          background: var(--color-primary);
-         border-radius: 0.25rem;
-         box-shadow: 0 0 5px var(--color-background);
-         font-family: Helvetica;
-         font-size: 1.3rem;
+      }
+
+      & > button,
+      & > a {
+         flex: 1;
+
+         padding: 0.75rem 2rem;
          color: var(--color-text);
+         border-radius: 0.25rem;
+
+         font-family: Consolas;
+         font-size: 1.3rem;
+         white-space: nowrap;
       }
    }
 }

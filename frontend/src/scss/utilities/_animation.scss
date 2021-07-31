@@ -3,6 +3,6 @@
 }
 
 #app {
-   --transition: 500;
+   --transition: 1000;
    transition: opacity calc(var(--transition) * 1ms);
 }
