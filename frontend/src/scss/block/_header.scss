@@ -8,7 +8,7 @@
    &__inner {
       display: grid;
       grid-template-columns: 4rem 5.5rem 1fr 2.5rem;
-      grid-template-rows: 1fr;
+      grid-template-rows: 5rem;
       gap: 1.5rem;
       place-items: center;
 
@@ -18,8 +18,6 @@
 
       & a,
       & button {
-         height: 5rem;
-
          & > svg {
             fill: var(--color-primary);
          }
@@ -31,6 +29,16 @@
 
       & [data-cart='info'] {
          position: absolute;
+      }
+   }
+
+   &__btn-menu {
+      & > span {
+         color: var(--color-primary);
+      }
+
+      & > span:nth-child(2) {
+         display: none;
       }
    }
 }
