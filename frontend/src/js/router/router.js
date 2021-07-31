@@ -21,11 +21,19 @@ const routes = [
    { path: '/error', component: Error404, title: 'Orinoco - Error' },
 ];
 
+const colors = {
+   all: 'text',
+   teddies: 'primary',
+   cameras: 'ternary',
+   furniture: 'secondary',
+};
+
 function updateLinkShoppingCart() {
    const link = document.querySelector('#shopping-link');
    const category = history.state.category;
 
    link.setAttribute('href', `/${category}/shopping-cart`);
+   link.style.color = `var(--color-${colors[category]})`;
 }
 
 async function setHistoryCategory() {

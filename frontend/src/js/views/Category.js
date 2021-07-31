@@ -39,7 +39,7 @@ export const Category = {
                   <h1>${category}</h1>
                   <a href="/" data-router>Back</a>
                </div>
-               <div class="category__grid">${cards}</div>
+               <div class="category__grid">${cards} <div>placeholder</div> </div>
             </div>
          </section>
       `;

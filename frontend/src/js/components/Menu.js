@@ -2,7 +2,7 @@ const navigation = [
    { name: 'Home', href: '/' },
    { name: 'Teddies', href: '/teddies' },
    { name: 'Cameras', href: '/cameras' },
-   { name: 'Furniture', href: '/curniture' },
+   { name: 'Furnitures', href: '/furniture' },
 ];
 
 const render = async () => {

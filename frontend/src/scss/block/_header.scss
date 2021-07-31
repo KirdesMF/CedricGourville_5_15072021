@@ -26,6 +26,7 @@
       & > a[href*='/shopping-cart'] {
          height: 100%;
          color: var(--color-text);
+         transition: color 500ms;
       }
    }
 }
