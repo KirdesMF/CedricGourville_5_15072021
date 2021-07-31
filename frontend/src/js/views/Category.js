@@ -14,7 +14,7 @@ const Cards = (datas, category) => {
          const href = `/${category}?id=${_id}`;
 
          return /*html */ `
-            <a href="${href}" data-router class="article__card">
+            <a href="${href}" data-router class="category__card">
                <img width="320" height="240" src="${imageUrl}" />
                <div>
                   <h2>${name}</h2>
@@ -33,13 +33,13 @@ export const Category = {
       const cards = Cards(datas, category);
 
       return /* html */ `
-         <section class="article panel h100 grid grid-center">
-            <div class="wrapper grid-flow" id="myContainer">
-               <div>
+         <section class="category panel h100 grid">
+            <div class="wrapper grid-flow">
+               <div class="category__title" >
                   <h1>${category}</h1>
                   <a href="/" data-router>Back</a>
                </div>
-               <div class="article__grid">${cards}</div>
+               <div class="category__grid">${cards}</div>
             </div>
          </section>
       `;

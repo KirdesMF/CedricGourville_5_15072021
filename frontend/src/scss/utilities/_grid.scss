@@ -1,11 +1,11 @@
 .grid {
    display: grid;
 
-   &-center {
+   &-items-center {
       place-items: center;
    }
-}
 
-.place-self {
-   place-self: center;
+   &-content-center {
+      place-content: center;
+   }
 }

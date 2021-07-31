@@ -1,6 +1,12 @@
-.article {
+.category {
    --padding-panel: 4.5rem;
    --gap-flow: 4.5rem;
+
+   &__title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+   }
 
    & h1 {
       font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -15,9 +21,12 @@
 
       &::before {
          position: absolute;
+         bottom: 0;
          content: '';
+
          width: 10ch;
          height: 5px;
+
          background: linear-gradient(
             90deg,
             var(--color-background),
@@ -25,20 +34,17 @@
             var(--color-secondary),
             var(--color-background)
          );
-         bottom: 0;
       }
    }
 
    &__grid {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(18rem, 100%), 1fr));
       gap: 2.5rem;
    }
 
    &__card {
-      flex: 1 0 20rem;
       overflow: hidden;
-
       display: grid;
       grid-template-rows: 20rem max-content;
       grid-template-columns: 1fr;
