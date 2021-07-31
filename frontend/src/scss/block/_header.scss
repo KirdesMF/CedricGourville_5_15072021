@@ -15,10 +15,6 @@
       & > button {
          height: 80%;
          color: var(--color-text);
-
-         & > svg:last-child {
-            display: none;
-         }
       }
 
       & > a[href='/'] {

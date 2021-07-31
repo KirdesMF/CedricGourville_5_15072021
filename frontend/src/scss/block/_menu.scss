@@ -1,21 +1,31 @@
 .menu {
    position: fixed;
    height: 100%;
-   width: 50%;
-
+   width: 100%;
    z-index: 10;
 
    display: grid;
-   grid-template-rows: 10% 1fr;
-   place-items: center;
+   grid-template-rows: 3.5rem 1fr;
 
    background: var(--color-secondary);
+   animation: slide-in 500ms;
 
    & > button {
+      justify-self: start;
    }
 
    & > nav {
+      place-self: center;
       display: grid;
-      gap: 2rem;
+      gap: 1.5rem;
+   }
+}
+
+@keyframes slide-in {
+   from {
+      transform: translateX(-100%);
+   }
+   to {
+      transform: translateX(0%);
    }
 }
