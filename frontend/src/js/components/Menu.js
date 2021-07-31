@@ -7,28 +7,28 @@ const navigation = [
 
 const render = async () => {
    return `
-   <div id="menu" class="menu panel" >
-      <button id="close-menu">
-         <svg
-            class="svg-icon"
-            focusable="false"
-            role="img"
-            aria-hidden="true"
-         >
-            <use href="#close-icon" />
-         </svg>
-      </button>
-      <nav>
-         ${navigation
-            .map(
-               (anchor) => `
-                  <a data-router href="${anchor.href}">${anchor.name}</a>
-               `
-            )
-            .join('')}
-      </nav>
-   </div>
-`;
+      <div id="menu" class="menu panel" >
+         <button id="close-menu">
+            <svg
+               class="svg-icon"
+               focusable="false"
+               role="img"
+               aria-hidden="true"
+            >
+               <use href="#close-icon" />
+            </svg>
+         </button>
+         <nav>
+            ${navigation
+               .map(
+                  (anchor) => `
+                     <a data-router href="${anchor.href}">${anchor.name}</a>
+                  `
+               )
+               .join('')}
+         </nav>
+      </div>
+   `;
 };
 
 const set = (isOpen) => {
@@ -39,7 +39,10 @@ const set = (isOpen) => {
    window.dispatchEvent(customEvent);
 
    aside.addEventListener('click', (event) => {
-      if (event.target.matches('#close-menu') || event.target.matches('a')) {
+      if (
+         event.target.matches('#close-menu') ||
+         event.target.matches('a[data-router]')
+      ) {
          aside.animate(
             [
                { transform: 'translateX(0%)' },
@@ -61,7 +64,7 @@ export function Menu() {
    const body = document.body;
    let isOpen = false;
 
-   btn.addEventListener('click', async (event) => {
+   btn.addEventListener('click', async () => {
       isOpen = true;
 
       if (isOpen) {

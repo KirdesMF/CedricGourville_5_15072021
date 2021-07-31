@@ -15,7 +15,7 @@ const Cards = (datas, category) => {
 
          return /*html */ `
             <a href="${href}" data-router class="category__card">
-               <img width="320" height="240" src="${imageUrl}" />
+               <img loading="lazy" src="${imageUrl}" />
                <div>
                   <h2>${name}</h2>
                   <small>${formatPrice(price)}</small>
