@@ -1,0 +1,34 @@
+.footer {
+   --padding-panel: 0.75rem;
+   --max-width: 90rem;
+
+   &__inner {
+      display: grid;
+      grid-template-columns: min-content 1fr 2rem;
+      grid-template-rows: 5rem;
+      gap: 1.5rem;
+      place-items: center;
+
+      border-top: 0.5px solid var(--color-text);
+
+      & > nav {
+         display: grid;
+         grid-template-columns: repeat(2, 2rem);
+         grid-template-rows: 1.5rem;
+         gap: 1rem;
+
+         & > a {
+            color: var(--color-secondary);
+         }
+      }
+
+      & > small {
+         color: var(--color-text);
+         justify-self: end;
+      }
+
+      & > a {
+         height: 100%;
+      }
+   }
+}

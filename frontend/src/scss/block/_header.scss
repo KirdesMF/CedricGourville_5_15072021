@@ -7,38 +7,29 @@
 
    &__inner {
       display: grid;
-      grid-template-columns: 4rem 5.5rem 1fr 2.5rem;
-      grid-template-rows: 5rem;
+      grid-template-columns: 4rem 1fr 2.5rem;
+      grid-template-rows: 3.5rem;
       gap: 1.5rem;
       place-items: center;
 
-      & > :last-child {
-         grid-column: 4 / -1;
-      }
+      & > button {
+         height: 80%;
+         color: var(--color-text);
 
-      & a,
-      & button {
-         & > svg {
-            fill: var(--color-primary);
+         & > svg:last-child {
+            display: none;
          }
       }
 
-      & #shopping-link {
-         position: relative;
+      & > a[href='/'] {
+         justify-self: start;
+         color: var(--color-text);
+         text-decoration: none;
       }
 
-      & [data-cart='info'] {
-         position: absolute;
-      }
-   }
-
-   &__btn-menu {
-      & > span {
-         color: var(--color-primary);
-      }
-
-      & > span:nth-child(2) {
-         display: none;
+      & > a[href*='/shopping-cart'] {
+         height: 100%;
+         color: var(--color-text);
       }
    }
 }
