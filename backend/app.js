@@ -30,10 +30,10 @@ app.use('/api/cameras', cameraRoutes);
 app.use('/api/teddies', teddyRoutes);
 app.use('/api/furniture', furnitureRoutes);
 
-app.use(express.static(path.join(__dirname, 'frontend/public')));
+app.use(express.static(path.join(__dirname, '../frontend/public')));
 
 app.get('/*', (req, res) => {
-   res.sendFile(path.join(__dirname, 'frontend/public', 'index.html'));
+   res.sendFile(path.join(__dirname, '../frontend/public', 'index.html'));
 });
 
 module.exports = app;
