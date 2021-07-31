@@ -50,27 +50,28 @@ export const TableCart = {
             const select = Select(quantity);
 
             return /* html */ `
+               
                <tr data-category="${category}" data-id="${id}" data-name="${name}" data-option="${option}" data-quantity="${quantity}" >
-                  <td>
+                  <th>
                      <a href="${href}" data-router >${name}</a>
-                  </td>
+                  </th>
+
                   <td>${option}</td>
-                  <td>${quantity}</td>
                   <td>${formatPrice(price)}</td>
+
                   <td>${select}</td>
                   <td>${formatPrice(totalPrice)}</td>
+
                   <td>
                      <button data-cart="remove">
-                        <span>
-                           <svg
-                              class="svg-icon"
-                              focusable="false"
-                              role="img"
-                              aria-hidden="true"
-                           >
-                              <use href="#trash-icon" />
-                           </svg>
-                        </span>
+                        <svg
+                           class="svg-icon"
+                           focusable="false"
+                           role="img"
+                           aria-hidden="true"
+                        >
+                           <use href="#trash-icon" />
+                        </svg>
                      </button>
                   </td>
                </tr>
@@ -82,9 +83,17 @@ export const TableCart = {
 
       return /*html */ `
          <table>
+            <caption>
+               <a data-router href="/${category}/shopping-cart">${category}</a>
+            </caption>
             <thead>
                <tr>
-                  <th colspan="100">Shopping Cart ${category}</th>
+                  <th>Name</th>
+                  <th>Option</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Subtotal</th>
+                  <th>Remove</th>
                </tr>
             </thead>
             <tbody>
@@ -92,8 +101,10 @@ export const TableCart = {
             </tbody>
             <tfoot>
                <tr>
-                  <th colspan="90">Total</th>
-                  <td>${formatPrice(total)}</td>
+                  <td>
+                     Total: 
+                     <b>${formatPrice(total)}</b>
+                  </td>
                </tr>
             </tfoot>
          </table>

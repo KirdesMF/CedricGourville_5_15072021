@@ -13,7 +13,7 @@ const INPUTS = [
 export const FormCart = {
    render: async () => {
       return /*html */ `
-         <form action="/success" method="POST"  class="grid-flow form-cart">
+         <form action="/success" method="POST"  class="panel wrapper grid-flow form-cart">
             ${INPUTS.map((input) => {
                return /*html */ `
                   <div>

@@ -4,10 +4,10 @@ import { useStorage } from '../utils/local-storage';
 
 const EmptyCart = (category) => {
    return /* html */ `
-      <div>
+      <section class="panel">
          <h1>YOUR ${category} CART IS EMPTY</h1>
          <a data-router href="/${category === 'all' ? '' : category}">Back</a>
-      </div>
+      </section>
    `;
 };
 
@@ -26,8 +26,14 @@ const HomeCart = async () => {
    const home = await Promise.all(promises);
 
    return /* html */ `
-      <section class="shopping-cart panel h100 grid-flow grid-center">
-         ${home.join('')}
+      <section class="shopping-cart panel">
+         <div class="wrapper grid-flow" >
+            <div class="shopping-cart__title">
+               <h1> Shopping Cart Home </h1>
+               <a href="/" data-router>Back</a>
+            </div>
+            ${home.join('')}
+         </div>
       </section>
    `;
 };
@@ -44,8 +50,14 @@ export const ShoppingCart = {
       if (!datas.length) return EmptyCart(category);
 
       return /* html */ `
-         <section class="shopping-cart panel h100 grid-flow grid-center">
-            ${table}
+         <section class="shopping-cart panel">
+            <div class="wrapper grid-flow" >
+               <div class="shopping-cart__title">
+                  <h1> Shopping Cart ${category} </h1>
+                  <a href="/" data-router>Back</a>
+               </div>
+               ${table}
+            </div>
          </section>
          <section class="panel">${form}</section>
       `;
