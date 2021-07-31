@@ -8,7 +8,9 @@
       "install-frontend": "cd frontend && npm install",
       "start-frontend": "cd frontend && npm run start",
       "start-all": "concurrently \"npm run start-frontend\" \"npm run start-backend\" ",
-      "test-front": "cd frontend && npm run test"
+      "test-front": "cd frontend && npm run test",
+      "start": "cd backend && npm run start",
+      "heroku-postbuild": "cd frontend && npm install && npm run start"
    },
    "repository": {
       "type": "git",
