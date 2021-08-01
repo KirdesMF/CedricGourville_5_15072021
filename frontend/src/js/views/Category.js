@@ -37,7 +37,7 @@ export const Category = {
             <div class="wrapper grid-flow">
                <div class="category__title" >
                   <h1>${category}</h1>
-                  <a href="/" data-router>
+                  <a href="/" data-router class="back">
                      <svg
                         class="svg-icon"
                         focusable="false"

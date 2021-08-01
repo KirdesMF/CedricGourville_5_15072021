@@ -20,7 +20,17 @@ export const Product = {
          <section class="product panel h100 grid grid-items-center" >
             <div class="wrapper">
                <div class="product__inner grid-flow">
-                  <a data-router href="/${category}">Back</a>
+                  <a data-router href="/${category}" class="back" >
+                     <svg
+                        class="svg-icon"
+                        focusable="false"
+                        role="img"
+                        aria-hidden="true"
+                     >
+                        <use href="#chevron-icon" />
+                     </svg>
+                     Back
+                  </a>
 
                   <article class="product__card">
                      <img 

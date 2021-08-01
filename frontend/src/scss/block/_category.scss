@@ -6,17 +6,6 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-
-      & > a {
-         display: grid;
-         grid-template-columns: 1.5rem min-content;
-         grid-template-rows: 1.5rem;
-         place-items: center;
-
-         color: var(--color-text);
-         font-size: 1.5rem;
-         text-decoration: none;
-      }
    }
 
    & h1 {

@@ -13,8 +13,18 @@ const EmptyCart = (category) => {
    return /* html */ `
       <section class="empty-cart grid grid-items-center h100">
          <div class="wrapper empty-cart__content">
+            <a data-router href="/${link}" class="back" >
+               <svg
+                  class="svg-icon"
+                  focusable="false"
+                  role="img"
+                  aria-hidden="true"
+               >
+                  <use href="#chevron-icon" />
+               </svg>
+               Back
+            </a>
             <h1>${message}</h1>
-            <a data-router href="/${link}">Back</a>
          </div>
       </section>
    `;
@@ -39,7 +49,17 @@ const HomeCart = async () => {
          <div class="wrapper grid-flow" >
             <div class="shopping-cart__title">
                <h1> Shopping Cart Home </h1>
-               <a href="/" data-router>Back</a>
+               <a href="/" data-router class="back">
+                  <svg
+                     class="svg-icon"
+                     focusable="false"
+                     role="img"
+                     aria-hidden="true"
+                  >
+                     <use href="#chevron-icon" />
+                  </svg>
+                  Back
+               </a>
             </div>
             ${home.join('')}
          </div>
@@ -63,7 +83,17 @@ export const ShoppingCart = {
             <div class="wrapper grid-flow" >
                <div class="shopping-cart__title">
                   <h1>Shopping Cart ${category}</h1>
-                  <a href="/" data-router>Back</a>
+                  <a href="/" data-router class="back">
+                     <svg
+                        class="svg-icon"
+                        focusable="false"
+                        role="img"
+                        aria-hidden="true"
+                     >
+                        <use href="#chevron-icon" />
+                     </svg>
+                     Back
+                  </a>
                </div>
                ${table}
             </div>
