@@ -8,11 +8,13 @@ const EmptyCart = (category) => {
          ? 'All your cards are empty'
          : `Your <span>${category}</span> cart is empty`;
 
+   const link = category === 'all' ? '' : category;
+
    return /* html */ `
       <section class="empty-cart grid grid-items-center h100">
          <div class="wrapper empty-cart__content">
             <h1>${message}</h1>
-            <a data-router href="/${category}">Back</a>
+            <a data-router href="/${link}">Back</a>
          </div>
       </section>
    `;
