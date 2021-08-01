@@ -92,7 +92,7 @@
       border: 0.2px solid var(--color-text);
 
       @media screen and (min-width: 768px) {
-         grid-template-columns: repeat(6, minmax(5rem, 1fr));
+         grid-template-columns: repeat(6, minmax(10rem, 1fr));
          place-items: center;
 
          &:nth-child(even) {
@@ -103,7 +103,10 @@
 
       & a {
          color: var(--color-secondary);
-         font-size: clamp(0.5rem, 0.5vw + 0.7rem, 1.2rem);
+         font-size: clamp(0.5rem, 0.5vw + 0.7rem, 1rem);
+         max-width: 20ch;
+         text-overflow: ellipsis;
+         overflow: hidden;
       }
 
       & button {

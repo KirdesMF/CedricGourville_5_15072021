@@ -1,0 +1,81 @@
+.success {
+   --max-width: 70rem;
+
+   & h1 {
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      font-weight: 500;
+   }
+
+   &__content {
+      --gap-flow: 1.3rem;
+
+      border: 1px solid white;
+      padding: clamp(0.5rem, 1vw + 1rem, 2rem);
+      border-radius: 0.5rem;
+
+      & > h2 {
+         color: var(--color-ternary);
+      }
+
+      & > p {
+         white-space: nowrap;
+         font-size: 1rem;
+
+         & > b {
+            color: var(--color-primary);
+            font-size: clamp(0.5rem, 1vw + 0.5rem, 1rem);
+         }
+      }
+
+      & > a {
+         white-space: nowrap;
+         text-decoration: none;
+         color: var(--color-text);
+         background: var(--color-primary);
+         padding: 1rem;
+         display: flex;
+         flex-wrap: wrap;
+         align-items: center;
+         justify-content: space-between;
+
+         & > svg {
+            flex: 0 1 2.5rem;
+            animation: scale 500ms forwards 1500ms ease-in-out;
+         }
+
+         & > svg polyline {
+            stroke: green;
+            stroke-width: 5px;
+            animation: check 500ms forwards 1s;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+         }
+
+         & > svg circle {
+            stroke: var(--color-text);
+            stroke-width: 3.5px;
+            animation: check 500ms forwards;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+         }
+      }
+   }
+}
+
+@keyframes scale {
+   50% {
+      transform: scale(0.9);
+   }
+   60% {
+      transform: scale(1.05);
+   }
+   90% {
+      transform: scale(1);
+   }
+}
+
+@keyframes check {
+   to {
+      stroke-dashoffset: 0;
+   }
+}
