@@ -21,10 +21,10 @@ const EmptyCart = (category) => {
 };
 
 const HomeCart = async () => {
-   const keys = Object.keys(localStorage);
-   const values = Object.values(localStorage);
+   const keys = Object.keys(localStorage).filter((k) => k !== 'mode');
+   const values = Object.entries(localStorage).filter(([k, v]) => k !== 'mode');
 
-   if (values.every((v) => v === '[]')) return EmptyCart('all');
+   if (values.every(([k, v]) => v === '[]')) return EmptyCart('all');
 
    const promises = keys.map(async (category) => {
       const datas = useStorage.getProductFromCategory(category);

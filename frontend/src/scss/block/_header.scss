@@ -1,35 +1,81 @@
 .header {
    --padding-panel: 1.75rem;
-   --max-width: 90rem;
+   --max-width: 100%;
+   --padding-wrapper: 1rem;
+
+   @media screen and (min-width: 768px) {
+      --max-width: 90rem;
+      --padding-wrapper: 2.5rem;
+   }
 
    box-shadow: 0 2px 5px black;
    background-color: var(--color-background);
 
    &__inner {
       display: grid;
-      grid-template-columns: 4rem 1fr 2.5rem;
-      grid-template-rows: 3.5rem;
-      gap: 1.5rem;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 3rem;
       place-items: center;
+      gap: 1.5rem;
+
+      @media screen and (min-width: 768px) {
+         grid-template-columns: 3rem min-content 1fr 3rem 3rem;
+      }
+
+      & > * {
+         height: 100%;
+      }
 
       & > button {
-         height: 80%;
          color: var(--color-text);
       }
 
+      & > label {
+         @media screen and (min-width: 768px) {
+            grid-column: 4;
+         }
+      }
+
       & > a[href='/'] {
-         justify-self: start;
+         place-self: start center;
+
+         display: grid;
+         place-items: center;
+
          color: var(--color-text);
          text-decoration: none;
+
+         & > svg {
+            display: block;
+         }
+
+         & > span {
+            display: none;
+         }
+
+         @media screen and (min-width: 768px) {
+            & > svg {
+               display: none;
+            }
+
+            & > span {
+               display: inline-block;
+               pointer-events: none;
+            }
+         }
       }
 
       & > a[href*='/shopping-cart'] {
          display: grid;
          place-items: center;
-         height: 100%;
+
          color: var(--color-text);
-         transition: color 500ms;
          text-decoration: none;
+         transition: color 500ms;
+
+         @media screen and (min-width: 768px) {
+            grid-column: 5;
+         }
 
          & > svg {
             grid-area: 1 / 1 / -1 / -1;

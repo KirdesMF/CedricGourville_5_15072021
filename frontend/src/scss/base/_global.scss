@@ -1,9 +1,14 @@
 :root {
-   --padding-wrapper: 3rem;
+   --padding-wrapper: 1.5rem;
    --padding-panel: 2.5rem;
+
+   @media screen and (min-width: 768px) {
+      --padding-wrapper: 3rem;
+   }
 }
 
 body {
    background: var(--color-background);
    color: var(--color-text);
+   transition: color 200ms, background-color 200ms;
 }

@@ -1,6 +1,12 @@
 .footer {
-   --padding-panel: 0.75rem;
-   --max-width: 90rem;
+   --padding-panel: 1rem;
+   --max-width: 100%;
+   --padding-wrapper: 1rem;
+
+   @media screen and (min-width: 768px) {
+      --max-width: 90rem;
+      --padding-wrapper: 2.5rem;
+   }
 
    &__inner {
       display: grid;

@@ -1,0 +1,17 @@
+.mode {
+   & > input {
+      display: none;
+   }
+
+   & > svg {
+      transition: color 500ms;
+   }
+
+   & > input:checked + svg {
+      color: yellow;
+   }
+
+   &:hover {
+      cursor: pointer;
+   }
+}

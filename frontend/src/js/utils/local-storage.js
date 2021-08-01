@@ -22,9 +22,12 @@ function checkIsEmpty(category) {
    const products = getProductFromCategory(category);
 
    if (category === 'all') {
-      const storage = Object.values(localStorage);
+      const storage = Object.entries(localStorage).filter(
+         ([k, v]) => k !== 'mode'
+      );
 
-      if (storage.every((k) => k === '[]') || !storage.length) isEmpty = true;
+      if (storage.every(([k, v]) => v === '[]') || !storage.length)
+         isEmpty = true;
       else isEmpty = false;
 
       return isEmpty;

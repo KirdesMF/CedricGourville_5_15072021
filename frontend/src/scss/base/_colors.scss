@@ -11,3 +11,17 @@
 
    --color-info: hsl(150, 50%, 50%);
 }
+
+:root[data-mode='light'] {
+   --color-primary: hsl(270, 50%, 50%);
+   --color-secondary: hsl(310, 50%, 50%);
+   --color-ternary: hsl(30, 50%, 50%);
+
+   --color-background: hsl(200, 20%, 90%);
+   --color-text: hsl(200, 20%, 10%);
+
+   --start: var(--color-primary);
+   --stop: var(--color-secondary);
+
+   --color-info: hsl(150, 50%, 50%);
+}
