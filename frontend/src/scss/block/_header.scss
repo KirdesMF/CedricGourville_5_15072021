@@ -24,9 +24,36 @@
       }
 
       & > a[href*='/shopping-cart'] {
+         display: grid;
+         place-items: center;
          height: 100%;
          color: var(--color-text);
          transition: color 500ms;
+         text-decoration: none;
+
+         & > svg {
+            grid-area: 1 / 1 / -1 / -1;
+         }
+
+         & > span {
+            grid-area: 1 / 1 / -1 / -1;
+            place-self: start end;
+
+            display: grid;
+            place-items: center;
+
+            height: 1.5rem;
+            width: 1.5rem;
+
+            font-size: 1rem;
+            font-weight: 500;
+
+            border-radius: 50%;
+            box-shadow: 0 0 5px var(--color-background);
+            background: var(--color-info);
+            color: var(--color-text);
+            transition: transform 500ms ease-in-out;
+         }
       }
    }
 }

@@ -149,6 +149,7 @@ export const TableCart = {
 
                useStorage.updateItem(datas);
 
+               //TODO create function to trigger event
                const customEvent = new Event('update');
                window.dispatchEvent(customEvent);
             }

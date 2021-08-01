@@ -1,3 +1,4 @@
+import { useStorage } from '../utils/local-storage';
 import { parseStringToNumber, setPathToCategory } from '../utils/utils';
 import { Category } from '../views/Category';
 import { Error404 } from '../views/Error404';
@@ -22,7 +23,7 @@ const routes = [
 ];
 
 const colors = {
-   all: 'text',
+   all: 'info',
    teddies: 'primary',
    cameras: 'ternary',
    furniture: 'secondary',
@@ -30,10 +31,19 @@ const colors = {
 
 function updateLinkShoppingCart() {
    const link = document.querySelector('#shopping-link');
+   const info = document.querySelector('[data-circle]');
    const category = history.state.category;
+   const isEmpty = useStorage.checkIsEmpty(category);
 
    link.setAttribute('href', `/${category}/shopping-cart`);
-   link.style.color = `var(--color-${colors[category]})`;
+
+   if (!isEmpty) {
+      link.style.color = `var(--color-${colors[category]})`;
+      info.style.transform = `scale(1)`;
+   } else {
+      link.style.color = 'var(--color-text)';
+      info.style.transform = `scale(0)`;
+   }
 }
 
 async function setHistoryCategory() {
@@ -136,5 +146,5 @@ async function rerender() {
 );
 
 window.addEventListener('menu', setLinkRouter);
-
 window.addEventListener('load', init);
+window.addEventListener('shopping', updateLinkShoppingCart);

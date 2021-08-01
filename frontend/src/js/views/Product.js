@@ -84,13 +84,18 @@ export const Product = {
          const isMax = useStorage.addItem(datas);
 
          if (!isMax) {
+            //TODO create function to trigger event
+            const customEvent = new Event('shopping');
+            window.dispatchEvent(customEvent);
+
             count.animate(
                [
-                  { transform: 'translateY(0px)', opacity: 1, offset: 0.5 },
-                  { transform: 'translateY(-20px)', opacity: 0 },
+                  { transform: 'translateY(0px)', opacity: 0 },
+                  { transform: 'translateY(-20px)', opacity: 1 },
+                  { transform: 'translateY(-35px)', opacity: 0 },
                ],
                {
-                  duration: 350,
+                  duration: 600,
                   easing: 'ease-in',
                }
             );

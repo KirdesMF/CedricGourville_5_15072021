@@ -17,6 +17,25 @@ function getProductFromCategory(category) {
    return JSON.parse(localStorage.getItem(category)) || [];
 }
 
+function checkIsEmpty(category) {
+   let isEmpty;
+   const products = getProductFromCategory(category);
+
+   if (category === 'all') {
+      const storage = Object.values(localStorage);
+
+      if (storage.every((k) => k === '[]') || !storage.length) isEmpty = true;
+      else isEmpty = false;
+
+      return isEmpty;
+   }
+
+   if (!products.length) isEmpty = true;
+   else isEmpty = false;
+
+   return isEmpty;
+}
+
 /**
  *
  * @param {Product} product
@@ -68,7 +87,7 @@ function removeItem(product) {
    const item = items.find((i) => i.name === name && i.option === option);
 
    const cleanedItems = items.filter(
-      (el) => el.name != item.name || el.option != item.option
+      (i) => i.name != item.name || i.option != item.option
    );
 
    localStorage.setItem(category, JSON.stringify(cleanedItems));
@@ -89,4 +108,5 @@ export const useStorage = {
    removeItem,
    getProductFromCategory,
    cleanCategory,
+   checkIsEmpty,
 };
