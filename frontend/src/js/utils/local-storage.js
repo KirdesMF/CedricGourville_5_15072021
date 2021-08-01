@@ -24,22 +24,25 @@ function getProductFromCategory(category) {
  */
 function addItem(product) {
    const { category, name, quantity, option } = product;
+   let isMax;
 
    const items = getProductFromCategory(category);
    const item = items.find((i) => i.name === name && i.option === option);
 
    if (!item) items.push(product);
 
-   if (item && item.quantity < 10) {
+   if (item && item.quantity <= 10) {
       item.quantity += quantity;
+      isMax = false;
    }
 
-   if (item && item.quantity >= 10) {
+   if (item && item.quantity > 10) {
       item.quantity = 10;
-      alert('10 max bro');
+      isMax = true;
    }
 
    localStorage.setItem(category, JSON.stringify(items));
+   return isMax;
 }
 
 function updateItem(product) {

@@ -62,7 +62,10 @@ export const FormCart = {
                   </div>
                `;
             }).join('')}
-            <button id="btn-submit" type="submit">Order</button>
+            <button class="cta" id="btn-submit" type="submit">
+               <span class="cta__shadow"></span>
+               <span class="cta__front">Order</span>
+            </button>
          </form>
       `;
    },

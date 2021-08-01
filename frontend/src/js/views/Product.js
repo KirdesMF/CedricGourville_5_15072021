@@ -41,8 +41,16 @@ export const Product = {
                            ${options}
                         </select>
                         <div class="product__cta" >
-                           <button data-cart="btn" >Add to cart</button>
-                           <a href="/${category}/shopping-cart" data-router>Order it</a>
+                           <button class="cta"  data-cart="btn" >
+                              <span class="cta__shadow"></span>
+                              <span class="cta__front">Add to cart</span>
+                              <span data-count>+1</span>
+                              <span data-error>Max 10 articles</span>
+                           </button>
+                           <a href="/${category}/shopping-cart" data-router class="cta">
+                              <span class="cta__shadow"></span>
+                              <span class="cta__front">Order it</span>
+                           </a>
                         </div>
                      </div>
                   </article>
@@ -53,13 +61,16 @@ export const Product = {
    },
 
    set: () => {
+      const category = window.history.state.category;
+
       const btn = document.querySelector(`[data-cart="btn"]`);
       const select = document.querySelector(`[data-cart="options"]`);
       const product = document.querySelector('[data-id]');
-      const category = window.history.state.category;
+      const count = document.querySelector('[data-count]');
+      const error = document.querySelector('[data-error]');
 
-      btn.addEventListener('click', (e) => {
-         e.preventDefault();
+      btn.addEventListener('click', (event) => {
+         event.preventDefault();
 
          const datas = {
             category: category,
@@ -70,7 +81,41 @@ export const Product = {
             option: select.value,
          };
 
-         useStorage.addItem(datas);
+         const isMax = useStorage.addItem(datas);
+
+         if (!isMax) {
+            count.animate(
+               [
+                  { transform: 'translateY(0px)', opacity: 1, offset: 0.5 },
+                  { transform: 'translateY(-20px)', opacity: 0 },
+               ],
+               {
+                  duration: 350,
+                  easing: 'ease-in',
+               }
+            );
+         } else {
+            error.animate(
+               [
+                  { transform: 'translate(-50%, 0px) ', opacity: 0 },
+                  {
+                     transform: 'translate(-50%, 25px)',
+                     opacity: 1,
+                     offset: 0.2,
+                  },
+                  { transform: 'translate(-50%, 25px)', opacity: 1 },
+                  {
+                     transform: 'translate(-50%, 0px)',
+                     opacity: 0,
+                     offset: 0.9,
+                  },
+               ],
+               {
+                  duration: 1000,
+                  easing: 'ease-in',
+               }
+            );
+         }
       });
    },
 };

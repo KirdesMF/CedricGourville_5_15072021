@@ -33,7 +33,7 @@
 
       font-family: Consolas;
 
-      &:invalid button {
+      &:invalid button > cta__front {
          background-color: var(--color-disabled, pink);
       }
    }
@@ -92,9 +92,5 @@
 
    & button[type='submit'] {
       grid-area: btn;
-      background: var(--color-primary);
-      border: none;
-      color: var(--color-text);
-      padding: 2rem;
    }
 }

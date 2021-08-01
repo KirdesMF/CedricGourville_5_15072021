@@ -49,31 +49,11 @@
    &__cta {
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
       gap: 2.5rem;
 
-      & > a {
-         display: grid;
-         place-items: center;
-
-         background: var(--color-ternary);
-         text-decoration: none;
-      }
-
-      & > button {
-         background: var(--color-primary);
-      }
-
-      & > button,
-      & > a {
+      & > * {
          flex: 1;
-
-         padding: 0.75rem 2rem;
-         color: var(--color-text);
-         border-radius: 0.25rem;
-
-         font-family: Consolas;
-         font-size: 1.3rem;
-         white-space: nowrap;
       }
    }
 }
