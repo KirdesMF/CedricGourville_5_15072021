@@ -56,13 +56,28 @@ export const TableCart = {
                      <a href="${href}" data-router >${name}</a>
                   </th>
 
-                  <td>${option}</td>
-                  <td>${formatPrice(price)}</td>
-
-                  <td>${select}</td>
-                  <td>${formatPrice(totalPrice)}</td>
+                  <td>
+                     <span>Option: </span> 
+                     ${option}
+                  </td>
+                  
+                  <td>
+                     <span>Price: </span>
+                     ${formatPrice(price)}
+                  </td>
 
                   <td>
+                     <span>Quantity: </span>
+                     ${select}
+                  </td>
+
+                  <td>
+                     <span>Subtotal: </span>
+                     ${formatPrice(totalPrice)}
+                  </td>
+
+                  <td>
+                     <span>Remove: </span>
                      <button data-cart="remove">
                         <svg
                            class="svg-icon"
@@ -88,12 +103,12 @@ export const TableCart = {
             </caption>
             <thead>
                <tr>
-                  <th>Name</th>
-                  <th>Option</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Subtotal</th>
-                  <th>Remove</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Option</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Subtotal</th>
+                  <th scope="col">Remove</th>
                </tr>
             </thead>
             <tbody>

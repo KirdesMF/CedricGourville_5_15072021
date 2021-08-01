@@ -3,10 +3,17 @@ import { TableCart } from '../components/TableCart';
 import { useStorage } from '../utils/local-storage';
 
 const EmptyCart = (category) => {
+   const message =
+      category === 'all'
+         ? 'All your cards are empty'
+         : `Your <span>${category}</span> cart is empty`;
+
    return /* html */ `
-      <section class="panel">
-         <h1>YOUR ${category} CART IS EMPTY</h1>
-         <a data-router href="/${category === 'all' ? '' : category}">Back</a>
+      <section class="empty-cart grid grid-items-center h100">
+         <div class="wrapper empty-cart__content">
+            <h1>${message}</h1>
+            <a data-router href="/${category}">Back</a>
+         </div>
       </section>
    `;
 };
@@ -53,13 +60,18 @@ export const ShoppingCart = {
          <section class="shopping-cart panel">
             <div class="wrapper grid-flow" >
                <div class="shopping-cart__title">
-                  <h1> Shopping Cart ${category} </h1>
+                  <h1>Shopping Cart ${category}</h1>
                   <a href="/" data-router>Back</a>
                </div>
                ${table}
             </div>
          </section>
-         <section class="panel">${form}</section>
+         <section class="panel form-cart">
+            <div class="wrapper grid-flow" >
+               <h2>Order</h2>
+               ${form}
+            </div>
+         </section>
       `;
    },
    set: function () {

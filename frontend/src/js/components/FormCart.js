@@ -13,16 +13,16 @@ const INPUTS = [
 export const FormCart = {
    render: async () => {
       return /*html */ `
-         <form action="/success" method="POST"  class="panel wrapper grid-flow form-cart">
+         <form action="/success" method="POST">
             ${INPUTS.map((input) => {
                return /*html */ `
-                  <div>
+                  <div class="form-cart__input" data-grid="${input.id}">
                      <label for="${input.id}" >${input.label} *</label>
                      <input type="${input.type}" id="${input.id}" name="${input.id}" required />
                   </div>
                `;
             }).join('')}
-            <input type="submit" value="Command">
+            <button type="submit">Order</button>
          </form>
       `;
    },

@@ -1,14 +1,78 @@
 .form-cart {
-   & > div {
+   --max-width: 65rem;
+
+   & h2 {
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      font-size: 2rem;
+      font-weight: 500;
+   }
+
+   & form {
+      display: grid;
+      gap: 2.5rem;
+
+      grid-template:
+         'first' 1fr
+         'last' 1fr
+         'address' 1fr
+         'city' 1fr
+         'zip' 1fr
+         'mail' 1fr
+         'btn' 1fr
+         /1fr;
+
+      @media screen and (min-width: 768px) {
+         grid-template:
+            'first last' 1fr
+            'address address' 1fr
+            'city zip' 1fr
+            'mail mail' 1fr
+            'btn btn' 1fr
+            /1fr 1fr;
+      }
+
+      font-family: Consolas;
+   }
+
+   &__input {
       display: grid;
       gap: 0.25rem;
+
+      & > label {
+         white-space: nowrap;
+      }
+
+      & > input {
+         padding: 0.75rem;
+      }
+
+      &[data-grid='firstName'] {
+         grid-area: first;
+      }
+
+      &[data-grid='lastName'] {
+         grid-area: last;
+      }
+
+      &[data-grid='address'] {
+         grid-area: address;
+      }
+
+      &[data-grid='city'] {
+         grid-area: city;
+      }
+
+      &[data-grid='zip'] {
+         grid-area: zip;
+      }
+
+      &[data-grid='email'] {
+         grid-area: mail;
+      }
    }
 
-   & input:not([type='submit']) {
-      padding: 0.75rem;
-   }
-
-   & input[type='submit'] {
+   & button {
+      grid-area: btn;
       background: var(--color-primary);
       border: none;
       color: var(--color-text);
