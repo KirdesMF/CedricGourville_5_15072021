@@ -32,19 +32,14 @@
       }
 
       font-family: Consolas;
+
+      &:invalid button {
+         background-color: var(--color-disabled, pink);
+      }
    }
 
    &__input {
       display: grid;
-      gap: 0.25rem;
-
-      & > label {
-         white-space: nowrap;
-      }
-
-      & > input {
-         padding: 0.75rem;
-      }
 
       &[data-grid='firstName'] {
          grid-area: first;
@@ -69,9 +64,33 @@
       &[data-grid='email'] {
          grid-area: mail;
       }
+
+      & > label {
+         white-space: nowrap;
+
+         & span {
+            color: var(--color-ternary);
+         }
+      }
+
+      & > input {
+         padding: 0.75rem;
+
+         &::placeholder {
+            font-style: italic;
+         }
+
+         &:not(:placeholder-shown):invalid {
+            border: 2px solid var(--color-warning, red);
+         }
+
+         &:valid {
+            border: 2px solid var(--color-valid, green);
+         }
+      }
    }
 
-   & button {
+   & button[type='submit'] {
       grid-area: btn;
       background: var(--color-primary);
       border: none;

@@ -92,7 +92,7 @@
       border: 0.2px solid var(--color-text);
 
       @media screen and (min-width: 768px) {
-         grid-template-columns: repeat(6, minmax(10rem, 1fr));
+         grid-template-columns: repeat(6, minmax(1rem, 1fr));
          place-items: center;
 
          &:nth-child(even) {

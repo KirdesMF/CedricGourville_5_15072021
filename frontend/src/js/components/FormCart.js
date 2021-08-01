@@ -2,27 +2,67 @@ import { postOrder } from '../utils/fetch';
 import { useStorage } from '../utils/local-storage';
 
 const INPUTS = [
-   { type: 'text', id: 'firstName', label: 'First Name' },
-   { type: 'text', id: 'lastName', label: 'Last Name' },
-   { type: 'text', id: 'address', label: 'Address' },
-   { type: 'text', id: 'city', label: 'City' },
-   { type: 'text', id: 'zip', label: 'Zip Code' },
-   { type: 'email', id: 'email', label: 'Email' },
+   {
+      type: 'text',
+      id: 'firstName',
+      label: 'First Name',
+      placeholder: 'Enter your first name',
+   },
+   {
+      type: 'text',
+      id: 'lastName',
+      label: 'Last Name',
+      placeholder: 'Enter your last name',
+   },
+   {
+      type: 'text',
+      id: 'address',
+      label: 'Address',
+      placeholder: 'Fill in your address',
+   },
+   {
+      type: 'text',
+      id: 'city',
+      label: 'City',
+      placeholder: 'e.g. Paris',
+   },
+   {
+      type: 'text',
+      id: 'zip',
+      label: 'Zip Code',
+      placeholder: 'e.g. 75012, 10220...',
+      pattern: '[0-9]{5}',
+   },
+   {
+      type: 'email',
+      id: 'email',
+      label: 'Email',
+      placeholder: 'e.g. contact@orinoco.fr',
+   },
 ];
 
 export const FormCart = {
    render: async () => {
       return /*html */ `
-         <form action="/success" method="POST">
+         <form>
             ${INPUTS.map((input) => {
                return /*html */ `
                   <div class="form-cart__input" data-grid="${input.id}">
-                     <label for="${input.id}" >${input.label} *</label>
-                     <input type="${input.type}" id="${input.id}" name="${input.id}" required />
+                     <label for="${input.id}" >${
+                  input.label
+               } <span>*</span></label>
+                     <input
+                        placeholder="${input.placeholder}" 
+                        type="${input.type}" 
+                        id="${input.id}" 
+                        name="${input.id}" 
+                        ${input.pattern ? `pattern="${input.pattern}"` : ''}
+                        required 
+                     />
                   </div>
                `;
             }).join('')}
-            <button type="submit">Order</button>
+            <button id="btn-submit" type="submit">Order</button>
          </form>
       `;
    },
@@ -47,6 +87,8 @@ export const FormCart = {
       const city = document.getElementById('city');
       const address = document.getElementById('address');
       const zip = document.getElementById('zip');
+
+      const btn = document.getElementById('btn-submit');
 
       form.addEventListener('submit', (e) => {
          e.preventDefault();
