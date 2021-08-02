@@ -1,3 +1,4 @@
+import { triggerEvent } from './event';
 import { useStorage } from './local-storage';
 
 /**
@@ -59,9 +60,7 @@ export function postOrder(category, order) {
          useStorage.cleanCategory(category);
 
          window.history.pushState({ category }, '', `/${category}/success`);
-
-         const customEvent = new Event('update');
-         window.dispatchEvent(customEvent);
+         triggerEvent('update');
       })
       .catch((err) => alert(err));
 }

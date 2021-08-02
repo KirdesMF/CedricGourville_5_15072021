@@ -17,6 +17,11 @@ function getProductFromCategory(category) {
    return JSON.parse(localStorage.getItem(category)) || [];
 }
 
+/**
+ *
+ * @param {string} category
+ * @returns
+ */
 function checkIsEmpty(category) {
    let isEmpty;
    const products = getProductFromCategory(category);
@@ -51,7 +56,7 @@ function addItem(product) {
    const items = getProductFromCategory(category);
    const item = items.find((i) => i.name === name && i.option === option);
 
-   if (!item) items.push(product);
+   if (!item) return [...items, product];
 
    if (item && item.quantity <= 10) {
       item.quantity += quantity;
