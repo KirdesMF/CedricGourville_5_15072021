@@ -1,6 +1,6 @@
 .back {
    display: grid;
-   grid-template-columns: 1.5rem min-content;
+   grid-template-columns: 1.5rem max-content;
    grid-template-rows: 1.5rem;
    place-items: center;
 
