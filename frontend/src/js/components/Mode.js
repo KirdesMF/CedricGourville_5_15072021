@@ -2,6 +2,7 @@ function setDarkMode() {
    const input = document.querySelector('[data-mode="checkbox"]');
    const root = document.documentElement;
    const currentMode = localStorage.getItem('mode');
+   const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
    if (currentMode) {
       root.dataset.mode = currentMode;
@@ -9,6 +10,9 @@ function setDarkMode() {
       if (currentMode === 'dark') {
          input.checked = true;
       }
+   } else if (isDark) {
+      root.dataset.mode = 'dark';
+      input.checked = true;
    }
 
    input.addEventListener(

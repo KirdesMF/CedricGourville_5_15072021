@@ -58,7 +58,7 @@ async function setHistoryCategory() {
  *
  * @param {() => void} onFinish
  */
-function transitionView(keyframes, onFinish = null) {
+function transitionView(keyframes, onFinish = {}) {
    const app = document.getElementById('app');
    app.animate(keyframes, { duration: 500, fill: 'both' }).onfinish = onFinish;
 }
