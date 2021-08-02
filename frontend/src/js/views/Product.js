@@ -7,7 +7,6 @@ import {
    optionsAnimation,
 } from '../utils/transition';
 import { formatPrice, getOptionsFromDatas } from '../utils/utils';
-import { setZoom } from '../utils/zoom';
 
 async function render() {
    const href = window.location.href;
@@ -86,9 +85,6 @@ function set() {
    const product = document.querySelector('[data-id]');
    const count = document.querySelector('[data-count]');
    const error = document.querySelector('[data-error]');
-   const zoom = document.querySelector('[data-zoom]');
-
-   zoom.addEventListener('mousemove', setZoom);
 
    btn.addEventListener('click', (event) => {
       event.preventDefault();
