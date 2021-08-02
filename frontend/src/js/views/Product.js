@@ -84,11 +84,11 @@ function set() {
 
       const datas = {
          category: category,
-         id: product.dataset.id,
-         name: product.dataset.name,
-         price: product.dataset.price,
+         id: product.getAttribute('data-id'),
+         name: product.getAttribute('data-name'),
+         price: product.getAttribute('data-price'),
          quantity: 1,
-         option: select.value,
+         option: select.nodeValue,
       };
 
       const isMax = useStorage.addItem(datas);

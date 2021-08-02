@@ -111,7 +111,7 @@ function set(category, datas) {
       };
 
       postOrder(category, order);
-      sessionStorage.setItem(`${category}-total`, total);
+      sessionStorage.setItem(`${category}-total`, String(total));
    });
 }
 

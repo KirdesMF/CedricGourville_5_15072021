@@ -37,12 +37,14 @@ function updateLinkShoppingCart() {
 }
 
 const navigate = (event) => {
+   /**@type {HTMLAnchorElement} */
+   const target = event.target;
    event.preventDefault();
 
-   const href = event.target.getAttribute('href');
+   const href = target.getAttribute('href');
    const category = setPathToCategory(event.target.pathname);
 
-   if (location.href === event.target.href) return;
+   if (location.href === target.href) return;
 
    transitionView([{ opacity: 1 }, { opacity: 0 }], () => {
       window.history.pushState({ category: category }, '', href);
