@@ -45,8 +45,12 @@ export async function getProductFromAPI(category, id) {
 
 /**
  *
+ * @typedef {{[key: string]: string}} Contact
+ * @typedef {string[]} Products
+ *
  * @param {string} category
- * @param {object} order
+ * @param {Contact & Products} order
+ *
  */
 export function postOrder(category, order) {
    fetch(`${process.env.HOST}/api/${category}/order`, {

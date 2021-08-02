@@ -8,12 +8,16 @@
       grid-template-columns: repeat(auto-fit, minmax(min(30rem, 100%), 1fr));
       gap: 1.5rem;
 
+      & [data-zoom] {
+         border: 2px solid var(--color-text);
+         padding: 0.5rem;
+         overflow: hidden;
+      }
+
       & img {
          width: 100%;
          object-fit: cover;
          aspect-ratio: 4 / 3;
-         border: 2px solid var(--color-text);
-         padding: 0.5rem;
       }
    }
 

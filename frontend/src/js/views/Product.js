@@ -7,6 +7,7 @@ import {
    optionsAnimation,
 } from '../utils/transition';
 import { formatPrice, getOptionsFromDatas } from '../utils/utils';
+import { setZoom } from '../utils/zoom';
 
 async function render() {
    const href = window.location.href;
@@ -37,14 +38,16 @@ async function render() {
                      <span>Back</span>
                   </a>
 
-                  <article class="product__card">
-                     <img 
-                        src="${datas.imageUrl}"
-                        alt="${datas.description}"
-                        data-name="${datas.name}"
-                        data-id="${datas._id}" 
-                        data-price="${datas.price}"
-                     />
+                  <article class="product__card" >
+                     <div data-zoom>
+                        <img 
+                           src="${datas.imageUrl}"
+                           alt="${datas.description}"
+                           data-name="${datas.name}"
+                           data-id="${datas._id}" 
+                           data-price="${datas.price}"
+                        />
+                     </div>
                      <div class="product__content grid-flow" >
                         <h1>
                            <span class="title">${datas.name}</span>
@@ -83,6 +86,9 @@ function set() {
    const product = document.querySelector('[data-id]');
    const count = document.querySelector('[data-count]');
    const error = document.querySelector('[data-error]');
+   const zoom = document.querySelector('[data-zoom]');
+
+   zoom.addEventListener('mousemove', setZoom);
 
    btn.addEventListener('click', (event) => {
       event.preventDefault();
