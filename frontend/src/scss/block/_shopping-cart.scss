@@ -53,37 +53,6 @@
       place-items: center;
    }
 
-   tbody {
-      display: grid;
-      gap: 2.5rem;
-
-      @media screen and (min-width: 768px) {
-         gap: unset;
-      }
-   }
-
-   tbody td {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-
-      @media screen and (min-width: 768px) {
-         & > span {
-            display: none;
-            visibility: hidden;
-         }
-      }
-   }
-
-   tfoot td {
-      grid-column: -1;
-      color: var(--color-text);
-
-      & > b {
-         color: var(--color-ternary);
-      }
-   }
-
    tr {
       display: grid;
       grid-auto-rows: 1fr;
@@ -129,6 +98,37 @@
          &:nth-child(even) {
             background-color: unset;
          }
+      }
+   }
+
+   tbody {
+      display: grid;
+      gap: 2.5rem;
+
+      @media screen and (min-width: 768px) {
+         gap: unset;
+      }
+   }
+
+   tbody td {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+
+      @media screen and (min-width: 768px) {
+         & > span {
+            display: none;
+            visibility: hidden;
+         }
+      }
+   }
+
+   tfoot td {
+      grid-column: -1;
+      color: var(--color-text);
+
+      & > b {
+         color: var(--color-ternary);
       }
    }
 }

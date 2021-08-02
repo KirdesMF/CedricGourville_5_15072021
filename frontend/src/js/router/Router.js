@@ -1,6 +1,6 @@
 import { useStorage } from '../utils/local-storage';
 import { transitionView } from '../utils/transition';
-import { parseStringToNumber, setPathToCategory } from '../utils/utils';
+import { checkRouterPath, setPathToCategory } from '../utils/utils';
 import { ROUTES } from './routes';
 
 async function setHistoryCategory() {
@@ -18,7 +18,7 @@ const colors = {
 };
 
 function updateLinkShoppingCart() {
-   const link = document.querySelector('#shopping-link');
+   const link = document.getElementById('shopping-link');
    const info = document.querySelector('[data-circle]');
    const category = history.state.category;
    const isEmpty = useStorage.checkIsEmpty(category);
@@ -27,10 +27,12 @@ function updateLinkShoppingCart() {
 
    if (!isEmpty) {
       link.style.color = `var(--color-${colors[category]})`;
-      info.style.transform = `scale(1)`;
+      info.classList.add('scale');
+      info.classList.remove('unscale');
    } else {
       link.style.color = 'var(--color-text)';
-      info.style.transform = `scale(0)`;
+      info.classList.add('unscale');
+      info.classList.remove('scale');
    }
 }
 
@@ -64,32 +66,16 @@ function setLinkRouter() {
    });
 }
 
-//TODO improve render view check string
 async function renderView() {
    const app = document.getElementById('app');
-   const path = window.location.pathname;
-   const href = window.location.href;
 
-   const { component, title } = ROUTES.find((route) => {
-      if (href.includes('?id=')) {
-         return route.path === '/product';
-      }
+   const { render, set, title } = ROUTES.find((route) =>
+      checkRouterPath(route)
+   );
 
-      if (path.includes('/shopping-cart')) {
-         return route.path === '/shopping-cart';
-      }
-
-      if (path.includes('/success')) {
-         return route.path === '/success';
-      }
-
-      return route.path === path || route.path === '/error';
-   });
-
-   app.innerHTML = await component.render();
-   if ('set' in component) component.set();
+   app.innerHTML = await render();
+   if (set) set();
    document.title = title;
-
    transitionView([{ opacity: 0 }, { opacity: 1 }]);
 }
 

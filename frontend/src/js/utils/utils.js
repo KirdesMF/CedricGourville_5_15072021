@@ -5,7 +5,7 @@
  * @description transform string to a string in Euro
  */
 export function formatPrice(price) {
-   const number = price / 100; // change string to number
+   const number = Number(price) / 100; // change string to number
    return new Intl.NumberFormat('fr-FR', {
       style: 'currency',
       currency: 'EUR',
@@ -75,4 +75,33 @@ export function getTableTotalPrice(datas) {
  */
 export function getRowTotalPrice(quantity, price) {
    return quantity * parseStringToNumber(price);
+}
+
+/**
+ *
+ * @param {object} route
+ * @param {string} route.path
+ * @param {() => void} route.render
+ * @param {() => void} [route.set]
+ * @param {string} route.title
+ *
+ * @returns
+ */
+export function checkRouterPath(route) {
+   const path = window.location.pathname;
+   const href = window.location.href;
+
+   if (href.includes('?id=')) {
+      return route.path === '/product';
+   }
+
+   if (path.includes('/shopping-cart')) {
+      return route.path === '/shopping-cart';
+   }
+
+   if (path.includes('/success')) {
+      return route.path === '/success';
+   }
+
+   return route.path === path || route.path === '/error';
 }

@@ -3,12 +3,10 @@ import { formatPrice } from '../utils/utils';
 
 /**
  * @typedef {object} Product
- * @property {number} quantity
- * @property {string} category
  * @property {string} name
  * @property {string} price
- * @property {string} id
- * @property {string} option
+ * @property {string} _id
+ * @property {string} imageUrl
  **/
 
 /**

@@ -1,8 +1,7 @@
-.transition {
-   opacity: 0;
+.scale {
+   transform: scale(1) !important;
 }
 
-#app {
-   --transition: 1000;
-   transition: opacity calc(var(--transition) * 1ms);
+.unscale {
+   transform: scale(0) !important;
 }

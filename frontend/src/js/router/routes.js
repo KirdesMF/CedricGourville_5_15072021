@@ -6,16 +6,26 @@ import { ShoppingCart } from '../views/ShoppingCart';
 import { Success } from '../views/Success';
 
 export const ROUTES = [
-   { path: '/', component: Home, title: 'Oricono - Home' },
-   { path: '/teddies', component: Category, title: 'Oricono - Teddies' },
-   { path: '/cameras', component: Category, title: 'Oricono - Cameras' },
-   { path: '/furniture', component: Category, title: 'Oricono - Furniture' },
-   { path: '/product', component: Product, title: 'Oricono - Product' },
+   { path: '/', render: Home.render, title: 'Oricono - Home' },
+   { path: '/teddies', render: Category.render, title: 'Oricono - Teddies' },
+   { path: '/cameras', render: Category.render, title: 'Oricono - Cameras' },
+   {
+      path: '/furniture',
+      render: Category.render,
+      title: 'Oricono - Furniture',
+   },
+   {
+      path: '/product',
+      render: Product.render,
+      title: 'Oricono - Product',
+      set: Product.set,
+   },
    {
       path: '/shopping-cart',
-      component: ShoppingCart,
+      render: ShoppingCart.render,
+      set: ShoppingCart.set,
       title: 'Oricono - Shopping Cart ',
    },
-   { path: '/success', component: Success, title: 'Orinoco - Success' },
-   { path: '/error', component: Error404, title: 'Orinoco - Error' },
+   { path: '/success', render: Success.render, title: 'Orinoco - Success' },
+   { path: '/error', render: Error404.render, title: 'Orinoco - Error' },
 ];
