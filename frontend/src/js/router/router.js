@@ -58,20 +58,9 @@ async function setHistoryCategory() {
  *
  * @param {() => void} onFinish
  */
-function transitionView(onFinish) {
+function transitionView(keyframes, onFinish = null) {
    const app = document.getElementById('app');
-
-   const transition = getComputedStyle(app).getPropertyValue('--transition');
-
-   const add = () => app.classList.add('transition');
-   const remove = () => app.classList.remove('transition');
-
-   add();
-
-   setTimeout(() => {
-      onFinish();
-      remove();
-   }, parseStringToNumber(transition));
+   app.animate(keyframes, { duration: 500, fill: 'both' }).onfinish = onFinish;
 }
 
 const navigate = (event) => {
@@ -82,12 +71,15 @@ const navigate = (event) => {
 
    if (location.href === event.target.href) return;
 
-   transitionView(() => {
+   transitionView([{ opacity: 1 }, { opacity: 0 }], () => {
       window.history.pushState({ category: category }, '', href);
       rerender();
    });
 };
 
+/**
+ * @description remove default of anchor tag to use js routing
+ */
 function setLinkRouter() {
    const anchors = document.querySelectorAll(`[data-router]`);
 
@@ -100,6 +92,8 @@ function setLinkRouter() {
       anchor.setAttribute('data-event', 'true');
    });
 }
+
+function checkRoute() {}
 
 //TODO improve render view check string
 async function renderView() {
@@ -126,6 +120,8 @@ async function renderView() {
    app.innerHTML = await component.render();
    if ('set' in component) component.set();
    document.title = title;
+
+   transitionView([{ opacity: 0 }, { opacity: 1 }]);
 }
 
 async function init() {
