@@ -6,27 +6,29 @@ const navigation = [
 ];
 
 const render = async () => {
-   return `
+   return /* html */ `
       <div id="menu" class="menu panel" >
-         <button id="close-menu">
-            <svg
-               class="svg-icon"
-               focusable="false"
-               role="img"
-               aria-hidden="true"
-            >
-               <use href="#close-icon" />
-            </svg>
-         </button>
-         <nav>
-            ${navigation
-               .map(
-                  (anchor) => `
-                     <a data-router href="${anchor.href}">${anchor.name}</a>
-                  `
-               )
-               .join('')}
-         </nav>
+         <div class="wrapper h100 menu__inner" >
+            <button id="close-menu">
+               <svg
+                  class="svg-icon"
+                  focusable="false"
+                  role="img"
+                  aria-hidden="true"
+               >
+                  <use href="#close-icon" />
+               </svg>
+            </button>
+            <nav>
+               ${navigation
+                  .map(
+                     (anchor) => `
+                        <a data-router href="${anchor.href}">${anchor.name}</a>
+                     `
+                  )
+                  .join('')}
+            </nav>
+         </div>
       </div>
    `;
 };
