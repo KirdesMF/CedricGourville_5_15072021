@@ -1,26 +1,14 @@
 import { useStorage } from '../utils/local-storage';
+import { transitionView } from '../utils/transition';
 import { parseStringToNumber, setPathToCategory } from '../utils/utils';
-import { Category } from '../views/Category';
-import { Error404 } from '../views/Error404';
-import { Home } from '../views/Home';
-import { Product } from '../views/Product';
-import { ShoppingCart } from '../views/ShoppingCart';
-import { Success } from '../views/Success';
+import { ROUTES } from './routes';
 
-const routes = [
-   { path: '/', component: Home, title: 'Oricono - Home' },
-   { path: '/teddies', component: Category, title: 'Oricono - Teddies' },
-   { path: '/cameras', component: Category, title: 'Oricono - Cameras' },
-   { path: '/furniture', component: Category, title: 'Oricono - Furniture' },
-   { path: '/product', component: Product, title: 'Oricono - Product' },
-   {
-      path: '/shopping-cart',
-      component: ShoppingCart,
-      title: 'Oricono - Shopping Cart ',
-   },
-   { path: '/success', component: Success, title: 'Orinoco - Success' },
-   { path: '/error', component: Error404, title: 'Orinoco - Error' },
-];
+async function setHistoryCategory() {
+   const path = window.location.pathname;
+   const category = setPathToCategory(path);
+
+   window.history.pushState({ category: category }, '');
+}
 
 const colors = {
    all: 'info',
@@ -44,23 +32,6 @@ function updateLinkShoppingCart() {
       link.style.color = 'var(--color-text)';
       info.style.transform = `scale(0)`;
    }
-}
-
-async function setHistoryCategory() {
-   const path = window.location.pathname;
-   const category = setPathToCategory(path);
-
-   window.history.pushState({ category: category }, '');
-}
-
-//TODO improve how to handle transition
-/**
- *
- * @param {() => void} onFinish
- */
-function transitionView(keyframes, onFinish = {}) {
-   const app = document.getElementById('app');
-   app.animate(keyframes, { duration: 500, fill: 'both' }).onfinish = onFinish;
 }
 
 const navigate = (event) => {
@@ -93,15 +64,13 @@ function setLinkRouter() {
    });
 }
 
-function checkRoute() {}
-
 //TODO improve render view check string
 async function renderView() {
    const app = document.getElementById('app');
    const path = window.location.pathname;
    const href = window.location.href;
 
-   const { component, title } = routes.find((route) => {
+   const { component, title } = ROUTES.find((route) => {
       if (href.includes('?id=')) {
          return route.path === '/product';
       }
@@ -141,6 +110,6 @@ async function rerender() {
    window.addEventListener(event, rerender)
 );
 
-window.addEventListener('menu', setLinkRouter);
 window.addEventListener('load', init);
+window.addEventListener('menu', setLinkRouter);
 window.addEventListener('shopping', updateLinkShoppingCart);

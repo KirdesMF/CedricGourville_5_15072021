@@ -1,3 +1,5 @@
+import { triggerEvent } from '../utils/event';
+
 const navigation = [
    { name: 'Home', href: '/' },
    { name: 'Teddies', href: '/teddies' },
@@ -36,9 +38,7 @@ const render = async () => {
 const set = (isOpen) => {
    const aside = document.getElementById('menu');
 
-   //TODO make a function to trigger custom event
-   const customEvent = new Event('menu');
-   window.dispatchEvent(customEvent);
+   triggerEvent('menu');
 
    aside.addEventListener('click', (event) => {
       if (

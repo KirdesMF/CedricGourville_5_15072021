@@ -1,14 +1,13 @@
 import { formatPrice } from '../utils/utils';
 
-export const Success = {
-   render: () => {
-      const category = history.state.category;
+function render() {
+   const category = history.state.category;
 
-      //TODO make an utility function session storage
-      const orderId = sessionStorage.getItem('orderId');
-      const total = sessionStorage.getItem(`${category}-total`);
+   //TODO make an utility function session storage
+   const orderId = sessionStorage.getItem('orderId');
+   const total = sessionStorage.getItem(`${category}-total`);
 
-      return /*html */ `
+   return /*html */ `
          <section class="success h100 panel grid grid-items-center">
             <div class="wrapper" >
                <div class="success__inner grid-flow" >
@@ -29,5 +28,7 @@ export const Success = {
             </div>
          </section>
       `;
-   },
+}
+export const Success = {
+   render,
 };

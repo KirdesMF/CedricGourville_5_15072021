@@ -38,7 +38,6 @@ const HomeCart = async () => {
 
    const promises = keys.map(async (category) => {
       const datas = useStorage.getProductFromCategory(category);
-
       return TableCart.render(category, datas);
    });
 
@@ -67,19 +66,18 @@ const HomeCart = async () => {
    `;
 };
 
-export const ShoppingCart = {
-   render: async function () {
-      const category = window.history.state.category;
-      const datas = useStorage.getProductFromCategory(category);
-      const link = category === 'all' ? '' : category;
+async function render() {
+   const category = window.history.state.category;
+   const datas = useStorage.getProductFromCategory(category);
+   const link = category === 'all' ? '' : category;
 
-      const table = await TableCart.render(category, datas);
-      const form = await FormCart.render();
+   const table = await TableCart.render(category, datas);
+   const form = await FormCart.render();
 
-      if (category === 'all') return HomeCart();
-      if (!datas.length) return EmptyCart(category);
+   if (category === 'all') return HomeCart();
+   if (!datas.length) return EmptyCart(category);
 
-      return /* html */ `
+   return /* html */ `
          <section class="shopping-cart panel">
             <div class="wrapper grid-flow" >
                <div class="shopping-cart__title">
@@ -106,15 +104,20 @@ export const ShoppingCart = {
             </div>
          </section>
       `;
-   },
-   set: function () {
-      const category = window.history.state.category;
-      const datas = useStorage.getProductFromCategory(category);
+}
 
-      if (category === 'all') TableCart.set();
-      if (!datas.length) return;
+function set() {
+   const category = window.history.state.category;
+   const datas = useStorage.getProductFromCategory(category);
 
-      FormCart.set(category, datas);
-      TableCart.set();
-   },
+   if (category === 'all') TableCart.set();
+   if (!datas.length) return;
+
+   FormCart.set(category, datas);
+   TableCart.set();
+}
+
+export const ShoppingCart = {
+   render,
+   set,
 };

@@ -1,5 +1,5 @@
 import { postOrder } from '../utils/fetch';
-import { useStorage } from '../utils/local-storage';
+import { getTableTotalPrice } from '../utils/utils';
 
 const INPUTS = [
    {
@@ -41,9 +41,8 @@ const INPUTS = [
    },
 ];
 
-export const FormCart = {
-   render: async () => {
-      return /*html */ `
+async function render() {
+   return /*html */ `
          <form>
             ${INPUTS.map((input) => {
                return /*html */ `
@@ -68,47 +67,55 @@ export const FormCart = {
             </button>
          </form>
       `;
-   },
-   /**
-    *
-    * @param {Product[] | []} datas
-    * @param {string} category
-    * @returns
-    */
-   set: (category, datas) => {
-      const form = document.querySelector('form');
-      const products = datas.map((d) => d.id);
-      const total = datas
-         .map((d) => d.quantity * Number(d.price))
-         .reduce((a, b) => a + b, 0);
+}
 
-      const inputs = document.querySelectorAll('form input');
+/**
+ * @typedef {object} Product
+ * @property {number} quantity
+ * @property {string} category
+ * @property {string} name
+ * @property {string} price
+ * @property {string} id
+ * @property {string} option
+ **/
 
-      const firstName = document.getElementById('firstName');
-      const lastName = document.getElementById('lastName');
-      const email = document.getElementById('email');
-      const city = document.getElementById('city');
-      const address = document.getElementById('address');
-      const zip = document.getElementById('zip');
+/**
+ *
+ * @param {string} category
+ * @param {Product[]} datas
+ */
+function set(category, datas) {
+   const form = document.querySelector('form');
+   const products = datas.map((d) => d.id);
+   const total = getTableTotalPrice(datas);
 
-      const btn = document.getElementById('btn-submit');
+   const firstName = document.getElementById('firstName');
+   const lastName = document.getElementById('lastName');
+   const email = document.getElementById('email');
+   const city = document.getElementById('city');
+   const address = document.getElementById('address');
+   const zip = document.getElementById('zip');
 
-      form.addEventListener('submit', (e) => {
-         e.preventDefault();
+   form.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-         const order = {
-            contact: {
-               firstName: firstName.value,
-               lastName: lastName.value,
-               address: `${address.value} ${zip.value}`,
-               city: city.value,
-               email: email.value,
-            },
-            products: products,
-         };
+      const order = {
+         contact: {
+            firstName: firstName.value,
+            lastName: lastName.value,
+            address: `${address.value} ${zip.value}`,
+            city: city.value,
+            email: email.value,
+         },
+         products: products,
+      };
 
-         postOrder(category, order);
-         sessionStorage.setItem(`${category}-total`, total);
-      });
-   },
+      postOrder(category, order);
+      sessionStorage.setItem(`${category}-total`, total);
+   });
+}
+
+export const FormCart = {
+   render,
+   set,
 };
