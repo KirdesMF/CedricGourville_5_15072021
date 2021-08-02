@@ -29,7 +29,7 @@ export const Product = {
                      >
                         <use href="#chevron-icon" />
                      </svg>
-                     Back
+                     <span>Back</span>
                   </a>
 
                   <article class="product__card">
@@ -42,7 +42,7 @@ export const Product = {
                      />
                      <div class="product__content grid-flow" >
                         <h1>
-                           <span>${datas.name}</span>
+                           <span class="title">${datas.name}</span>
                            <b>${formatedPrice}</b>
                         </h1>
                         

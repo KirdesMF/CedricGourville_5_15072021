@@ -1,0 +1,28 @@
+.title {
+   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+   font-size: clamp(3rem, 3vw + 1.5rem, 65rem);
+   position: relative;
+
+   &::first-letter {
+      color: var(--color-secondary);
+      font-weight: 800;
+      text-transform: uppercase;
+   }
+
+   &::before {
+      position: absolute;
+      bottom: 0;
+      content: '';
+
+      width: 5ch;
+      height: 5px;
+
+      background: linear-gradient(
+         90deg,
+         var(--color-background),
+         var(--color-primary),
+         var(--color-secondary),
+         var(--color-background)
+      );
+   }
+}

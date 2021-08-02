@@ -60,6 +60,7 @@
       grid-template-columns: 1fr;
 
       text-decoration: none;
+      box-shadow: 0 0 5px var(--color-text);
 
       &:hover img {
          filter: grayscale(0%);

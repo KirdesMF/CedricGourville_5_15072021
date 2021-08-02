@@ -46,7 +46,7 @@ export const Category = {
                      >
                         <use href="#chevron-icon" />
                      </svg>
-                     Back
+                     <span>Back</span>
                   </a>
                </div>
                <div class="category__grid">

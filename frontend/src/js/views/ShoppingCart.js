@@ -22,7 +22,7 @@ const EmptyCart = (category) => {
                >
                   <use href="#chevron-icon" />
                </svg>
-               Back
+               <span>Back</span>
             </a>
             <h1>${message}</h1>
          </div>
@@ -48,7 +48,7 @@ const HomeCart = async () => {
       <section class="shopping-cart panel">
          <div class="wrapper grid-flow" >
             <div class="shopping-cart__title">
-               <h1> Shopping Cart Home </h1>
+               <h1 class="title" > Shopping Cart Home </h1>
                <a href="/" data-router class="back">
                   <svg
                      class="svg-icon"
@@ -58,7 +58,7 @@ const HomeCart = async () => {
                   >
                      <use href="#chevron-icon" />
                   </svg>
-                  Back
+                  <span>Back</span>
                </a>
             </div>
             ${home.join('')}
@@ -82,7 +82,7 @@ export const ShoppingCart = {
          <section class="shopping-cart panel">
             <div class="wrapper grid-flow" >
                <div class="shopping-cart__title">
-                  <h1>Shopping Cart ${category}</h1>
+                  <h1 class="title">Shopping Cart ${category}</h1>
                   <a href="/" data-router class="back">
                      <svg
                         class="svg-icon"
@@ -92,7 +92,7 @@ export const ShoppingCart = {
                      >
                         <use href="#chevron-icon" />
                      </svg>
-                     Back
+                     <span>Back</span>
                   </a>
                </div>
                ${table}
@@ -100,7 +100,7 @@ export const ShoppingCart = {
          </section>
          <section class="panel form-cart">
             <div class="wrapper grid-flow" >
-               <h2>Order</h2>
+               <h2 class="title">Order</h2>
                ${form}
             </div>
          </section>
