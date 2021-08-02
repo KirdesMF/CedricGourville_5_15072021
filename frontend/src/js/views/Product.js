@@ -1,6 +1,11 @@
 import { triggerEvent } from '../utils/event';
 import { getProductFromAPI } from '../utils/fetch';
 import { useStorage } from '../utils/local-storage';
+import {
+   countKeyframes,
+   errorKeyframes,
+   optionsAnimation,
+} from '../utils/transition';
 import { formatPrice, getOptionsFromDatas } from '../utils/utils';
 
 async function render() {
@@ -84,51 +89,20 @@ function set() {
 
       const datas = {
          category: category,
-         id: product.getAttribute('data-id'),
-         name: product.getAttribute('data-name'),
-         price: product.getAttribute('data-price'),
+         id: product.dataset.id,
+         name: product.dataset.name,
+         price: product.dataset.price,
          quantity: 1,
-         option: select.nodeValue,
+         option: select.value,
       };
 
       const isMax = useStorage.addItem(datas);
 
       if (!isMax) {
          triggerEvent('shopping');
-
-         // TODO create an animate function
-         count.animate(
-            [
-               { transform: 'translateY(0px)', opacity: 0 },
-               { transform: 'translateY(-20px)', opacity: 1 },
-               { transform: 'translateY(-35px)', opacity: 0 },
-            ],
-            {
-               duration: 600,
-               easing: 'ease-in',
-            }
-         );
+         count.animate(countKeyframes, optionsAnimation);
       } else {
-         error.animate(
-            [
-               { transform: 'translate(-50%, 0px) ', opacity: 0 },
-               {
-                  transform: 'translate(-50%, 25px)',
-                  opacity: 1,
-                  offset: 0.2,
-               },
-               { transform: 'translate(-50%, 25px)', opacity: 1 },
-               {
-                  transform: 'translate(-50%, 0px)',
-                  opacity: 0,
-                  offset: 0.9,
-               },
-            ],
-            {
-               duration: 1000,
-               easing: 'ease-in',
-            }
-         );
+         error.animate(errorKeyframes, optionsAnimation);
       }
    });
 }
