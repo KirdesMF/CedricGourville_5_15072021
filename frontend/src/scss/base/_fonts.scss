@@ -1,26 +1,33 @@
+:root {
+   --font-family-title: Impact, Haettenschweiler, 'Arial Narrow Bold',
+      sans-serif;
+   --font-family-text: Consolas, monaco, monospace;
+}
+
 h1,
 h2,
 h3,
 p,
-a {
+a,
+span {
    font-size: clamp(
       var(--fluid-type-min, 1rem),
       calc(1rem + var(--fluid-type-target, 3vw)),
       var(--fluid-type-max, 1.3rem)
    );
-   font-family: Consolas, monaco, monospace;
+   font-family: Consolas;
 }
 
+h1,
+h2,
+h3 {
+   font-family: var(--font-family-title);
+}
+
+p,
+b,
 small,
-b {
-   font-family: Consolas, monaco, monospace;
-}
-
-h1 {
-   font-family: Arial, Helvetica, sans-serif;
-   font-size: 1.875rem;
-}
-
-a {
-   font-family: Consolas, monaco, monospace;
+a,
+span {
+   font-family: var(--font-family-text);
 }
