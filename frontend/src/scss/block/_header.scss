@@ -99,6 +99,7 @@
             background: var(--color-info);
             color: var(--color-text);
             transition: transform 500ms ease-in-out;
+            pointer-events: none;
          }
       }
    }

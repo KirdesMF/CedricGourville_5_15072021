@@ -71,6 +71,7 @@ export const ShoppingCart = {
    render: async function () {
       const category = window.history.state.category;
       const datas = useStorage.getProductFromCategory(category);
+      const link = category === 'all' ? '' : category;
 
       const table = await TableCart.render(category, datas);
       const form = await FormCart.render();
@@ -83,7 +84,7 @@ export const ShoppingCart = {
             <div class="wrapper grid-flow" >
                <div class="shopping-cart__title">
                   <h1 class="title">Shopping Cart ${category}</h1>
-                  <a href="/" data-router class="back">
+                  <a href="/${link}" data-router class="back">
                      <svg
                         class="svg-icon"
                         focusable="false"
