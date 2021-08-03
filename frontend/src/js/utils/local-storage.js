@@ -60,13 +60,13 @@ function getAllKeys() {
  * @param {Product} product
  *
  */
-function addItem({ category, name, quantity, option, price }) {
+function addItem({ category, name, quantity, option, price, id }) {
    let isMax;
 
    const products = getProductFromCategory(category);
    const product = products.find((i) => i.name === name && i.option === option);
 
-   if (!product) products.push({ category, name, quantity, option, price });
+   if (!product) products.push({ category, name, quantity, option, price, id });
 
    if (product && product.quantity <= 10) {
       product.quantity += quantity;

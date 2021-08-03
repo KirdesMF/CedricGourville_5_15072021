@@ -3,6 +3,7 @@
    "version": "1.0.0",
    "description": "P5 OC",
    "scripts": {
+      "build": "npm run test-front && git push origin main && git push heroku main",
       "install-all": "concurrently \"cd backend && npm install\" \"cd frontend && npm install\" ",
       "start-dev": "concurrently \"cd frontend && npm run test && npm run start\" \"cd backend && npm run start\" ",
       "test-front": "cd frontend && npm run test",
