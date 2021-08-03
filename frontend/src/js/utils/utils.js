@@ -1,3 +1,11 @@
+const CATEGORIES = ['teddies', 'cameras', 'furniture'];
+const PATHS = ['/product', '/shopping-cart', '/success'];
+const OPTIONS = {
+   teddies: 'colors',
+   cameras: 'lenses',
+   furniture: 'varnish',
+};
+
 /**
  *
  * @param {string} price
@@ -12,12 +20,6 @@ export function formatPrice(price) {
    }).format(number);
 }
 
-const options = {
-   teddies: 'colors',
-   cameras: 'lenses',
-   furniture: 'varnish',
-};
-
 /**
  *
  * @param {keyof options} category
@@ -25,7 +27,7 @@ const options = {
  * @description used to get the options array
  */
 export function getOptionsFromDatas(category) {
-   return options[category];
+   return OPTIONS[category];
 }
 
 /**
@@ -34,7 +36,7 @@ export function getOptionsFromDatas(category) {
  *
  */
 export function parseStringToNumber(text) {
-   return parseInt(text, 10);
+   return parseFloat(text, 10);
 }
 
 /**
@@ -42,8 +44,11 @@ export function parseStringToNumber(text) {
  * @param {string} pathname
  */
 export function setPathToCategory(pathname) {
-   if (pathname === '/') return 'all';
-   return pathname.split('/')[1];
+   const category = pathname.split('/')[1];
+   const isCategory = CATEGORIES.some((cat) => cat === category);
+
+   if (!isCategory) return 'all';
+   return category;
 }
 
 /**
@@ -59,7 +64,7 @@ export function setPathToCategory(pathname) {
 /**
  *
  * @param {Product[]} datas
- * @returns
+ *
  */
 export function getTableTotalPrice(datas) {
    return datas
@@ -84,24 +89,18 @@ export function getRowTotalPrice(quantity, price) {
  * @param {() => void} route.render
  * @param {() => void} [route.set]
  * @param {string} route.title
+ * @param {string} path
+ * @param {string} href
  *
  * @returns
  */
-export function checkRouterPath(route) {
-   const path = window.location.pathname;
-   const href = window.location.href;
+export function checkRouterPath(path, href) {
+   const isCategory = [...CATEGORIES, 'all'].some((cat) => href.includes(cat));
+   const isAnnex = PATHS.some((p) => href.includes(p));
+   const annexPath = PATHS.find((p) => href.includes(p));
 
-   if (href.includes('?id=')) {
-      return route.path === '/product';
-   }
+   if (isCategory && isAnnex) return annexPath;
+   if (isCategory || path === '/') return `/${path.split('/')[1]}`;
 
-   if (path.includes('/shopping-cart')) {
-      return route.path === '/shopping-cart';
-   }
-
-   if (path.includes('/success')) {
-      return route.path === '/success';
-   }
-
-   return route.path === path || route.path === '/error';
+   return '/error';
 }

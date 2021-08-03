@@ -33,7 +33,6 @@ export async function getProductFromAPI(category, id) {
 
       if (!res.ok) {
          console.log(res.status);
-
          return;
       }
 

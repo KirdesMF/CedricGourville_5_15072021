@@ -19,7 +19,7 @@ const Cards = (datas, category) => {
    return datas
       .map((data) => {
          const { _id, name, price, imageUrl } = data;
-         const href = `/${category}?id=${_id}`;
+         const href = `/${category}/product?id=${_id}`;
 
          return /*html */ `
             <a href="${href}" data-router class="category__card">

@@ -47,9 +47,9 @@ async function render() {
             ${INPUTS.map((input) => {
                return /*html */ `
                   <div class="form-cart__input" data-grid="${input.id}">
-                     <label for="${input.id}" >${
-                  input.label
-               } <span>*</span></label>
+                     <label for="${input.id}" > 
+                        ${input.label}<span>*</span>
+                     </label>
                      <input
                         placeholder="${input.placeholder}" 
                         type="${input.type}" 
@@ -57,6 +57,7 @@ async function render() {
                         name="${input.id}" 
                         ${input.pattern ? `pattern="${input.pattern}"` : ''}
                         required 
+                        minLength="2"
                      />
                   </div>
                `;
@@ -89,7 +90,7 @@ function set(category, datas) {
    const products = datas.map((d) => d.id);
    const total = getTableTotalPrice(datas);
 
-   //TODO loop over for elements
+   //TODO loop over form elements
    const firstName = document.getElementById('firstName');
    const lastName = document.getElementById('lastName');
    const email = document.getElementById('email');

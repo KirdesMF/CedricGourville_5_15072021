@@ -70,10 +70,12 @@ function setLinkRouter() {
 
 async function renderView() {
    const app = document.getElementById('app');
+   const path = window.location.pathname;
+   const href = window.location.href;
 
-   const { render, set, title } = ROUTES.find((route) =>
-      checkRouterPath(route)
-   );
+   const { render, set, title } = ROUTES.find((route) => {
+      return route.path === checkRouterPath(path, href);
+   });
 
    app.innerHTML = await render();
    if (set) set();

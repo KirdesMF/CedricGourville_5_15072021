@@ -12,10 +12,9 @@ a,
 span {
    font-size: clamp(
       var(--fluid-type-min, 1rem),
-      calc(1rem + var(--fluid-type-target, 3vw)),
+      calc(1rem + var(--fluid-type-target, 1vw)),
       var(--fluid-type-max, 1.3rem)
    );
-   font-family: Consolas;
 }
 
 h1,
@@ -30,4 +29,8 @@ small,
 a,
 span {
    font-family: var(--font-family-text);
+}
+
+.f-size-error {
+   --fluid-type-max: 1rem;
 }
