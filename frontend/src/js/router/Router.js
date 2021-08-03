@@ -21,7 +21,7 @@ function updateLinkShoppingCart() {
    const link = document.getElementById('shopping-link');
    const info = document.querySelector('[data-circle]');
    const category = history.state.category;
-   const isEmpty = useStorage.checkIsEmpty(category);
+   const isEmpty = useStorage.checkIsCategoryEmpty(category);
 
    link.setAttribute('href', `/${category}/shopping-cart`);
 
@@ -72,9 +72,10 @@ async function renderView() {
    const app = document.getElementById('app');
    const path = window.location.pathname;
    const href = window.location.href;
+   const routerPath = checkRouterPath(path, href);
 
    const { render, set, title } = ROUTES.find((route) => {
-      return route.path === checkRouterPath(path, href);
+      return route.path === routerPath;
    });
 
    app.innerHTML = await render();

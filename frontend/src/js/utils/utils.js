@@ -1,5 +1,6 @@
 const CATEGORIES = ['teddies', 'cameras', 'furniture'];
-const PATHS = ['/product', '/shopping-cart', '/success'];
+const ANNEXS = ['/product', '/shopping-cart', '/success'];
+const PATHS = ['/', '/teddies', '/cameras', '/furniture'];
 const OPTIONS = {
    teddies: 'colors',
    cameras: 'lenses',
@@ -26,7 +27,7 @@ export function formatPrice(price) {
  * @returns string
  * @description used to get the options array
  */
-export function getOptionsFromDatas(category) {
+export function getOptions(category) {
    return OPTIONS[category];
 }
 
@@ -96,11 +97,12 @@ export function getRowTotalPrice(quantity, price) {
  */
 export function checkRouterPath(path, href) {
    const isCategory = [...CATEGORIES, 'all'].some((cat) => href.includes(cat));
-   const isAnnex = PATHS.some((p) => href.includes(p));
-   const annexPath = PATHS.find((p) => href.includes(p));
+   const isPath = PATHS.some((p) => path.startsWith(p));
+   const isAnnex = ANNEXS.some((p) => href.includes(p));
+   const annexPath = ANNEXS.find((p) => href.includes(p));
 
-   if (isCategory && isAnnex) return annexPath;
-   if (isCategory || path === '/') return `/${path.split('/')[1]}`;
+   if (isCategory && isAnnex && isPath) return annexPath;
+   if (isCategory || isPath) return `/${path.split('/')[1]}`;
 
    return '/error';
 }

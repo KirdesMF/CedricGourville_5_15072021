@@ -19,68 +19,40 @@ function getProductFromCategory(category) {
 
 /**
  *
+ * @description use to know if localstorage is empty
+ *
+ */
+function checkIsEmpty() {
+   const values = Object.entries(localStorage).filter(([k, v]) => k !== 'mode');
+   return values.every(([k, v]) => v === '[]') || !values.length;
+}
+
+/**
+ *
  * @param {string} category
  * @returns
  */
-function checkIsEmpty(category) {
+function checkIsCategoryEmpty(category) {
    let isEmpty;
    const products = getProductFromCategory(category);
 
    if (category === 'all') {
-      const storage = Object.entries(localStorage).filter(
-         ([k, v]) => k !== 'mode'
-      );
-
-      if (storage.every(([k, v]) => v === '[]') || !storage.length)
-         isEmpty = true;
-      else isEmpty = false;
-
+      checkIsEmpty() ? (isEmpty = true) : (isEmpty = false);
       return isEmpty;
    }
 
-   if (!products.length) isEmpty = true;
-   else isEmpty = false;
-
+   !products.length ? (isEmpty = true) : (isEmpty = false);
    return isEmpty;
 }
 
 /**
  *
- * @param {Product} product
+ * @description get all keys of localstorage
  *
  */
-function addItem(product) {
-   const { category, name, quantity, option } = product;
-   let isMax;
-
-   const items = getProductFromCategory(category);
-   const item = items.find((i) => i.name === name && i.option === option);
-
-   if (!item) items.push(product);
-
-   if (item && item.quantity <= 10) {
-      item.quantity += quantity;
-      isMax = false;
-   }
-
-   if (item && item.quantity > 10) {
-      item.quantity = 10;
-      isMax = true;
-   }
-
-   localStorage.setItem(category, JSON.stringify(items));
-   return isMax;
-}
-
-function updateItem(product) {
-   const { category, name, quantity, option } = product;
-
-   const items = getProductFromCategory(category);
-   const item = items.find((i) => i.name === name && i.option === option);
-
-   item.quantity = quantity;
-
-   localStorage.setItem(category, JSON.stringify(items));
+function getAllKeys() {
+   const keys = Object.keys(localStorage).filter((k) => k !== 'mode');
+   return keys;
 }
 
 /**
@@ -88,23 +60,67 @@ function updateItem(product) {
  * @param {Product} product
  *
  */
-function removeItem(product) {
-   const { category, name, option } = product;
-   const items = getProductFromCategory(category);
+function addItem({ category, name, quantity, option, price }) {
+   let isMax;
 
-   const item = items.find((i) => i.name === name && i.option === option);
+   const products = getProductFromCategory(category);
+   const product = products.find((i) => i.name === name && i.option === option);
 
-   const cleanedItems = items.filter(
-      (i) => i.name != item.name || i.option != item.option
-   );
+   if (!product) products.push({ category, name, quantity, option, price });
 
-   localStorage.setItem(category, JSON.stringify(cleanedItems));
+   if (product && product.quantity <= 10) {
+      product.quantity += quantity;
+      isMax = false;
+   }
+
+   if (product && product.quantity > 10) {
+      product.quantity = 10;
+      isMax = true;
+   }
+
+   localStorage.setItem(category, JSON.stringify(products));
+   return isMax;
 }
 
+/**
+ *
+ * @param {Product} product
+ */
+function updateItem({ category, name, quantity, option }) {
+   const products = getProductFromCategory(category);
+   const product = products.find((i) => i.name === name && i.option === option);
+
+   product.quantity = quantity;
+   localStorage.setItem(category, JSON.stringify(products));
+}
+
+/**
+ *
+ * @param {Product} product
+ *
+ */
+function removeItem({ category, name, option }) {
+   const products = getProductFromCategory(category);
+   const product = products.find((i) => i.name === name && i.option === option);
+
+   const removed = products.filter(
+      (i) => i.name != product.name || i.option != product.option
+   );
+
+   localStorage.setItem(category, JSON.stringify(removed));
+}
+
+/**
+ * @description clear the local storage
+ */
 function clear() {
    localStorage.clear();
 }
 
+/**
+ *
+ * @param {string} category
+ */
 function cleanCategory(category) {
    localStorage.removeItem(category);
 }
@@ -117,4 +133,6 @@ export const useStorage = {
    getProductFromCategory,
    cleanCategory,
    checkIsEmpty,
+   checkIsCategoryEmpty,
+   getAllKeys,
 };

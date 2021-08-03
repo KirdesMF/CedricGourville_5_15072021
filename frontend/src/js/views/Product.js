@@ -6,14 +6,14 @@ import {
    errorKeyframes,
    optionsAnimation,
 } from '../utils/transition';
-import { formatPrice, getOptionsFromDatas } from '../utils/utils';
+import { formatPrice, getOptions } from '../utils/utils';
 
 async function render() {
    const href = window.location.href;
    const id = new URL(href).searchParams.get('id');
    const category = window.history.state.category;
 
-   const keyOptions = getOptionsFromDatas(category);
+   const keyOptions = getOptions(category);
    const datas = await getProductFromAPI(category, id);
    const formatedPrice = formatPrice(datas.price);
 

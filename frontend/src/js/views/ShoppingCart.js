@@ -5,7 +5,7 @@ import { useStorage } from '../utils/local-storage';
 const EmptyCart = (category) => {
    const message =
       category === 'all'
-         ? 'All your cards are empty'
+         ? 'All your carts are empty'
          : `Your <span>${category}</span> cart is empty`;
 
    const link = category === 'all' ? '' : category;
@@ -31,10 +31,10 @@ const EmptyCart = (category) => {
 };
 
 const HomeCart = async () => {
-   const keys = Object.keys(localStorage).filter((k) => k !== 'mode');
-   const values = Object.entries(localStorage).filter(([k, v]) => k !== 'mode');
+   const keys = useStorage.getAllKeys();
+   const isEmpty = useStorage.checkIsEmpty();
 
-   if (values.every(([k, v]) => v === '[]')) return EmptyCart('all');
+   if (isEmpty) return EmptyCart('all');
 
    const promises = keys.map(async (category) => {
       const datas = useStorage.getProductFromCategory(category);
@@ -47,7 +47,7 @@ const HomeCart = async () => {
       <section class="shopping-cart panel">
          <div class="wrapper grid-flow" >
             <div class="shopping-cart__title">
-               <h1 class="title" > Shopping Cart Home </h1>
+               <h1 class="title">Shopping Cart Home</h1>
                <a href="/" data-router class="back">
                   <svg
                      class="svg-icon"
@@ -69,13 +69,14 @@ const HomeCart = async () => {
 async function render() {
    const category = window.history.state.category;
    const datas = useStorage.getProductFromCategory(category);
+   const isEmpty = useStorage.checkIsCategoryEmpty(category);
    const link = category === 'all' ? '' : category;
 
    const table = await TableCart.render(category, datas);
    const form = await FormCart.render();
 
+   if (isEmpty) return EmptyCart(category);
    if (category === 'all') return HomeCart();
-   if (!datas.length) return EmptyCart(category);
 
    return /* html */ `
          <section class="shopping-cart panel">
@@ -109,12 +110,13 @@ async function render() {
 function set() {
    const category = window.history.state.category;
    const datas = useStorage.getProductFromCategory(category);
+   const isEmpty = useStorage.checkIsCategoryEmpty(category);
 
-   if (category === 'all') TableCart.set();
-   if (!datas.length) return;
+   if (isEmpty) return;
+   if (category === 'all') return TableCart.set();
 
-   FormCart.set(category, datas);
    TableCart.set();
+   FormCart.set(category, datas);
 }
 
 export const ShoppingCart = {
