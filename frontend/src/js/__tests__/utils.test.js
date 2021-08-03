@@ -1,6 +1,6 @@
 import {
    checkRouterPath,
-   getOptionsFromDatas,
+   getOptions,
    getRowTotalPrice,
    getTableTotalPrice,
    parseStringToNumber,
@@ -9,15 +9,15 @@ import {
 
 describe('get options product from datas', () => {
    test('if category is teddies options shoud be colors', () => {
-      expect(getOptionsFromDatas('teddies')).toBe('colors');
+      expect(getOptions('teddies')).toBe('colors');
    });
 
    test('if category is cameras options shoud be colors', () => {
-      expect(getOptionsFromDatas('cameras')).toBe('lenses');
+      expect(getOptions('cameras')).toBe('lenses');
    });
 
    test('if category is furniture options shoud be colors', () => {
-      expect(getOptionsFromDatas('furniture')).toBe('varnish');
+      expect(getOptions('furniture')).toBe('varnish');
    });
 });
 

@@ -21,6 +21,8 @@ async function render() {
       (d) => `<option value="${d}">${d}</option>`
    );
 
+   //TODO handle error create a custom error component ?
+
    return /*html */ `
          <section class="product panel h100 grid grid-items-center" >
             <div class="wrapper">
