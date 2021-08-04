@@ -7,16 +7,22 @@ import { useStorage } from './local-storage';
  * @returns
  */
 export async function getAllProductsFromAPI(category) {
+   const url = `${process.env.HOST || 'http://localhost:3000'}/api/${category}`;
    try {
-      const res = await fetch(`${process.env.HOST}/api/${category}`);
+      const res = await fetch(url);
+      const json = await res.json();
+
       if (!res.ok) {
          window.history.pushState({ category }, '', `/${category}/error`);
          triggerEvent('update');
          return;
       }
-      return res.json();
+      return json;
    } catch (err) {
-      console.log(err);
+      window.history.pushState({ category }, '', `/${category}/error`);
+      triggerEvent('update');
+
+      return null;
    }
 }
 
@@ -27,9 +33,12 @@ export async function getAllProductsFromAPI(category) {
  * @returns
  */
 export async function getProductFromAPI(category, id) {
-   const url = `${process.env.HOST}/api/${category}/${id}`;
+   const url = `${
+      process.env.HOST || 'http://localhost:3000'
+   }/api/${category}/${id}`;
    try {
       const res = await fetch(url);
+      const json = await res.json();
 
       if (!res.ok) {
          window.history.pushState({ category }, '', `/${category}/error`);
@@ -37,9 +46,11 @@ export async function getProductFromAPI(category, id) {
          return;
       }
 
-      return res.json();
+      return json;
    } catch (err) {
-      console.log(err);
+      window.history.pushState({ category }, '', `/${category}/error`);
+      triggerEvent('update');
+      return null;
    }
 }
 
@@ -52,22 +63,30 @@ export async function getProductFromAPI(category, id) {
  * @param {Contact & Products} order
  *
  */
-export function postOrder(category, order) {
-   fetch(`${process.env.HOST}/api/${category}/order`, {
-      method: 'POST',
-      body: JSON.stringify(order),
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
-   })
-      .then((res) => res.json())
-      .then((json) => {
-         sessionStorage.setItem('orderId', json.orderId);
-         useStorage.cleanCategory(category);
+export async function postOrder(category, order) {
+   const url = `${
+      process.env.HOST || 'http://localhost:3000'
+   }/api/${category}/order`;
 
-         window.history.pushState({ category }, '', `/${category}/success`);
-         triggerEvent('update');
-      })
-      .catch(() => {
-         window.history.pushState({ category }, '', `/${category}/error`);
-         triggerEvent('update');
+   try {
+      const res = await fetch(url, {
+         method: 'POST',
+         body: JSON.stringify(order),
+         headers: { 'Content-Type': 'application/json; charset=utf-8' },
       });
+
+      const json = await res.json();
+
+      sessionStorage.setItem('orderId', json.orderId);
+      useStorage.cleanCategory(category);
+
+      window.history.pushState({ category }, '', `/${category}/success`);
+      triggerEvent('update');
+
+      return json;
+   } catch (error) {
+      window.history.pushState({ category }, '', `/${category}/error`);
+      triggerEvent('update');
+      return null;
+   }
 }

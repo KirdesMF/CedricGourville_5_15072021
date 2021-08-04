@@ -29,6 +29,7 @@
    "devDependencies": {
       "@types/jest": "^26.0.24",
       "babel-jest": "^27.0.6",
-      "jest": "^27.0.6"
+      "jest": "^27.0.6",
+      "jest-fetch-mock": "^3.0.3"
    }
 }
