@@ -133,4 +133,22 @@ describe('return path to render view', () => {
          )
       ).toBe('/shopping-cart');
    });
+
+   test('if path contain product', () => {
+      expect(
+         checkRouterPath(
+            '/teddies/product',
+            'http://localhost:1234//teddies/product'
+         )
+      ).toBe('/product');
+   });
+
+   test('if error', () => {
+      expect(
+         checkRouterPath(
+            '/idk/forsometest',
+            'http://localhost:1234//idk/forsometest'
+         )
+      ).toBe('/error');
+   });
 });

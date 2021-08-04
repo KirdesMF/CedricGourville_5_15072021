@@ -10,10 +10,10 @@ export async function getAllProductsFromAPI(category) {
    try {
       const res = await fetch(`${process.env.HOST}/api/${category}`);
       if (!res.ok) {
-         console.log(res.status);
+         window.history.pushState({ category }, '', `/${category}/error`);
+         triggerEvent('update');
          return;
       }
-
       return res.json();
    } catch (err) {
       console.log(err);
@@ -32,7 +32,8 @@ export async function getProductFromAPI(category, id) {
       const res = await fetch(url);
 
       if (!res.ok) {
-         console.log(res.status);
+         window.history.pushState({ category }, '', `/${category}/error`);
+         triggerEvent('update');
          return;
       }
 
@@ -65,5 +66,8 @@ export function postOrder(category, order) {
          window.history.pushState({ category }, '', `/${category}/success`);
          triggerEvent('update');
       })
-      .catch((err) => alert(err));
+      .catch(() => {
+         window.history.pushState({ category }, '', `/${category}/error`);
+         triggerEvent('update');
+      });
 }

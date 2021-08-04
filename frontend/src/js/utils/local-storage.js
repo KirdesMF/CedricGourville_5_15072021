@@ -10,16 +10,6 @@
 
 /**
  *
- * @param {string} category
- * @returns {([] | Product[])}
- */
-function getProductFromCategory(category) {
-   const item = localStorage.getItem(category);
-   return item ? JSON.parse(item) : [];
-}
-
-/**
- *
  * @description use to know if localstorage is empty
  *
  */
@@ -33,29 +23,11 @@ function checkIsEmpty() {
 /**
  *
  * @param {string} category
- * @returns
+ * @returns {([] | Product[])}
  */
-function checkIsCategoryEmpty(category) {
-   let isEmpty;
-   const products = getProductFromCategory(category);
-
-   if (category === 'all') {
-      checkIsEmpty() ? (isEmpty = true) : (isEmpty = false);
-      return isEmpty;
-   }
-
-   !products.length ? (isEmpty = true) : (isEmpty = false);
-   return isEmpty;
-}
-
-/**
- *
- * @description get all keys of localstorage
- *
- */
-function getAllKeys() {
-   const keys = Object.keys(localStorage).filter((k) => k !== 'mode');
-   return keys;
+function getProductFromCategory(category) {
+   const item = localStorage.getItem(category);
+   return item ? JSON.parse(item) : [];
 }
 
 /**
@@ -98,6 +70,34 @@ function addItem({ category, name, quantity, option, price, id }) {
 
 /**
  *
+ * @param {string} category
+ * @returns
+ */
+function checkIsCategoryEmpty(category) {
+   let isEmpty;
+   const products = getProductFromCategory(category);
+
+   if (category === 'all') {
+      checkIsEmpty() ? (isEmpty = true) : (isEmpty = false);
+      return isEmpty;
+   }
+
+   !products.length ? (isEmpty = true) : (isEmpty = false);
+   return isEmpty;
+}
+
+/**
+ *
+ * @description get all keys of localstorage
+ *
+ */
+function getAllKeys() {
+   const keys = Object.keys(localStorage).filter((k) => k !== 'mode');
+   return keys;
+}
+
+/**
+ *
  * @param {Product} product
  */
 function updateItem({ category, name, quantity, option }) {
@@ -125,13 +125,6 @@ function removeItem({ category, name, option }) {
 }
 
 /**
- * @description clear the local storage
- */
-function clear() {
-   localStorage.clear();
-}
-
-/**
  *
  * @param {string} category
  */
@@ -140,7 +133,6 @@ function cleanCategory(category) {
 }
 
 export const useStorage = {
-   clear,
    addItem,
    updateItem,
    removeItem,

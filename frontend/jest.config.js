@@ -2,6 +2,7 @@ module.exports = {
    transform: {
       '^.+\\.(js|jsx|ts|tsx|mjs)$': 'babel-jest',
    },
-   coverageReporters: ['json', 'text'],
+   coverageReporters: ['text-summary', 'html', 'text'],
    testEnvironment: 'jsdom',
+   verbose: true,
 };
