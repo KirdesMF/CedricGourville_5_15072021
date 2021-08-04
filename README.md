@@ -19,3 +19,5 @@ This will start the backend `express` server and the frontend server with `parce
 <a href="https://gitmoji.dev">
   <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square" alt="Gitmoji">
 </a>
+
+Test coverage can be found [here](https://p5ocgourvillecedriccoverage.netlify.app/)
