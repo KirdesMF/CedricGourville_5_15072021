@@ -6,7 +6,8 @@
       "clean-cache": "npx rimraf .parcel-cache dist",
       "start": "npx rimraf .parcel-cache dist && parcel serve ./src/index.html --open",
       "build": "npx rimraf public && parcel build ./src/index.html --dist-dir public",
-      "test": "jest --watch --coverage "
+      "test-dev": "jest --watchAll --coverage",
+      "test": "jest --coverage"
    },
    "repository": {
       "type": "git",
