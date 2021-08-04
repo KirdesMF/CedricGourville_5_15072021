@@ -4,6 +4,8 @@ Début : 15 juillet 2021
 
 Fin prévue : 21 octobre 2021
 
+Fin : 5 Aout 2021
+
 Description : Construction d'un site e-commerce
 
 To install the project and run it locally
