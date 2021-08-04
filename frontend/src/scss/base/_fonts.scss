@@ -1,7 +1,18 @@
+@font-face {
+   font-family: 'Open Sans Bold';
+   font-weight: 800;
+   src: url('./assets/fonts/OpenSans-ExtraBold.ttf');
+}
+
+@font-face {
+   font-family: 'Open Sans';
+   font-weight: 300;
+   src: url('./assets/fonts/OpenSans-Light.ttf');
+}
 :root {
-   --font-family-title: Impact, Haettenschweiler, 'Arial Narrow Bold',
-      sans-serif;
-   --font-family-text: Consolas, monaco, monospace;
+   --font-family-title: Impact, 'Open Sans Bold', Haettenschweiler,
+      'Arial Narrow Bold', sans-serif;
+   --font-family-text: Consolas, 'Open Sans', monaco, monospace;
 }
 
 h1,
@@ -27,7 +38,10 @@ p,
 b,
 small,
 a,
-span {
+span,
+select,
+input,
+label {
    font-family: var(--font-family-text);
 }
 

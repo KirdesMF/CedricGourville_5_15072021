@@ -2,7 +2,6 @@
    --drop: 1px 1px 0px var(--color-secondary);
 
    & h1 {
-      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
       font-size: calc(15vmax + 1rem);
 
       filter: drop-shadow(var(--drop)) drop-shadow(var(--drop))

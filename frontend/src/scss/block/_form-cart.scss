@@ -2,7 +2,6 @@
    --max-width: 65rem;
 
    & h2 {
-      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
       font-size: 2rem;
       font-weight: 500;
    }
@@ -30,8 +29,6 @@
             'btn btn' 1fr
             /1fr 1fr;
       }
-
-      font-family: Consolas;
 
       &:invalid button > cta__front {
          background-color: var(--color-disabled, pink);
