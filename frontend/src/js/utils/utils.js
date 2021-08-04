@@ -1,6 +1,3 @@
-const CATEGORIES = ['teddies', 'cameras', 'furniture'];
-const ANNEXS = ['/product', '/shopping-cart', '/success'];
-const PATHS = ['/', '/teddies', '/cameras', '/furniture'];
 const OPTIONS = {
    teddies: 'colors',
    cameras: 'lenses',
@@ -41,18 +38,6 @@ export function parseStringToNumber(text) {
 }
 
 /**
- *
- * @param {string} pathname
- */
-export function setPathToCategory(pathname) {
-   const category = pathname.split('/')[1];
-   const isCategory = CATEGORIES.some((cat) => cat === category);
-
-   if (!isCategory) return 'all';
-   return category;
-}
-
-/**
  * @typedef {object} Product
  * @property {number} quantity
  * @property {string} category
@@ -83,26 +68,40 @@ export function getRowTotalPrice(quantity, price) {
    return quantity * parseStringToNumber(price);
 }
 
+const CATEGORIES = ['all', 'teddies', 'cameras', 'furniture'];
+const ANNEXS = ['product', 'shopping-cart', 'success'];
+
 /**
  *
- * @param {object} route
- * @param {string} route.path
- * @param {() => void} route.render
- * @param {() => void} [route.set]
- * @param {string} route.title
- * @param {string} path
- * @param {string} href
+ * @param {string} pathname
+ * @description use to grab the location pathname and return a category from it
+ */
+export function setPathToCategory(pathname) {
+   const path = pathname.split('/')[1];
+   const homePath = path === '' ? 'all' : path;
+   const category = CATEGORIES.find((element) => element === homePath);
+
+   if (category) return category;
+}
+
+/**
  *
+ * @param {string} pathname
+ * @param {string} href
  * @returns
  */
-export function checkRouterPath(path, href) {
-   const isCategory = [...CATEGORIES, 'all'].some((cat) => href.includes(cat));
-   const isPath = PATHS.some((p) => path.startsWith(p));
-   const isAnnex = ANNEXS.some((p) => href.includes(p));
-   const annexPath = ANNEXS.find((p) => href.includes(p));
+export function checkRouterPath(pathname, href) {
+   const url = pathname.split('/');
+   const isProduct = new URL(href).searchParams.has('id');
+   const isCategory = CATEGORIES.some((cat) => cat === url[1]);
 
-   if (isCategory && isAnnex && isPath) return annexPath;
-   if (isCategory || isPath) return `/${path.split('/')[1]}`;
+   if (isCategory && url[2]) {
+      const annex = ANNEXS.find((element) => element === url[2]);
+      if (annex) return `/${annex}`;
+   }
+
+   if (isCategory && isProduct) return '/product';
+   if ((isCategory && url.length === 2) || pathname === '/') return pathname;
 
    return '/error';
 }

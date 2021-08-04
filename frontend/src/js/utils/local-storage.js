@@ -14,7 +14,8 @@
  * @returns {([] | Product[])}
  */
 function getProductFromCategory(category) {
-   return JSON.parse(localStorage.getItem(category)) || [];
+   const item = localStorage.getItem(category);
+   return item ? JSON.parse(item) : [];
 }
 
 /**
@@ -23,8 +24,10 @@ function getProductFromCategory(category) {
  *
  */
 function checkIsEmpty() {
-   const values = Object.entries(localStorage).filter(([k, v]) => k !== 'mode');
-   return values.every(([k, v]) => v === '[]') || !values.length;
+   const values = Object.entries(localStorage).filter(([k, _]) => k !== 'mode');
+   const isEmpty = values.every(([_, v]) => v === '[]') || !values.length;
+
+   return isEmpty;
 }
 
 /**
@@ -66,7 +69,18 @@ function addItem({ category, name, quantity, option, price, id }) {
    const products = getProductFromCategory(category);
    const product = products.find((i) => i.name === name && i.option === option);
 
-   if (!product) products.push({ category, name, quantity, option, price, id });
+   if (!product) {
+      products.push({ category, name, quantity, option, price, id });
+      if (quantity <= 10) {
+         quantity += quantity;
+         isMax = false;
+      }
+
+      if (quantity > 10) {
+         quantity = 10;
+         isMax = true;
+      }
+   }
 
    if (product && product.quantity <= 10) {
       product.quantity += quantity;

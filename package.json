@@ -5,7 +5,7 @@
    "scripts": {
       "build": "npm run test-front && git push origin main && git push heroku main",
       "install-all": "concurrently \"cd backend && npm install\" \"cd frontend && npm install\" ",
-      "start-dev": "concurrently \"cd frontend && npm run test && npm run start\" \"cd backend && npm run start\" ",
+      "start-dev": "concurrently \"cd frontend && npm run test\" \"cd frontend && npm run start\" \"cd backend && npm run start\" ",
       "test-front": "cd frontend && npm run test",
       "start": "cd backend && npm install && npm run start",
       "heroku-postbuild": "cd frontend && npm install && npm run build"

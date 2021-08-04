@@ -3,4 +3,5 @@ module.exports = {
       '^.+\\.(js|jsx|ts|tsx|mjs)$': 'babel-jest',
    },
    coverageReporters: ['json', 'text'],
+   testEnvironment: 'jsdom',
 };
